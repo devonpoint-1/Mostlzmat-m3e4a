@@ -1,0 +1,1250 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>القواهر — تدبير المستلزمات المعيشية</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@500;700&display=swap">
+<style>
+/* Layout: a dark petrol "operations spine" on the right (RTL) holding navigation,
+   and a working canvas on the left. Data is tagged موثق / تقديري / مدخل مستخدم everywhere. */
+:root{
+  --bg:#ECEFF0; --surface:#FFFFFF; --surface2:#F3F6F7; --line:#D3DADD; --fg:#13222A; --muted:#566870;
+  --accent:#0E5A74; --accent-fg:#FFFFFF; --accent-soft:#DCEBF0;
+  --good:#256F45; --good-soft:#DCEEE3; --warn:#8F5A06; --warn-soft:#F5E6C6; --crit:#B0302A; --crit-soft:#F6DAD7;
+  --side-bg:#0B3340; --side-fg:#E3EEF1; --side-muted:#8FB0BB; --side-active:#15586D; --side-line:#1B4B5B;
+  --font-display:'Reem Kufi','IBM Plex Sans Arabic',sans-serif;
+  --font-body:'IBM Plex Sans Arabic',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D161B; --surface:#14222A; --surface2:#1A2B34; --line:#28414D; --fg:#E4EDF0; --muted:#93A8B1;
+    --accent:#5DB3D1; --accent-fg:#06242E; --accent-soft:#163845;
+    --good:#5CC38A; --good-soft:#173A2A; --warn:#E0A63B; --warn-soft:#3B2E12; --crit:#F0837B; --crit-soft:#3E1B19;
+    --side-bg:#08171D; --side-fg:#E3EEF1; --side-muted:#7FA0AB; --side-active:#123A48; --side-line:#173642;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D161B; --surface:#14222A; --surface2:#1A2B34; --line:#28414D; --fg:#E4EDF0; --muted:#93A8B1;
+  --accent:#5DB3D1; --accent-fg:#06242E; --accent-soft:#163845;
+  --good:#5CC38A; --good-soft:#173A2A; --warn:#E0A63B; --warn-soft:#3B2E12; --crit:#F0837B; --crit-soft:#3E1B19;
+  --side-bg:#08171D; --side-fg:#E3EEF1; --side-muted:#7FA0AB; --side-active:#123A48; --side-line:#173642;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.75;direction:rtl}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--side-bg)}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.app{display:grid;grid-template-columns:272px minmax(0,1fr);min-height:100vh}
+.side{background:var(--side-bg);color:var(--side-fg);position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto}
+.side-in{padding-block:24px 30px}
+.brand .mark{font:700 38px/1.05 var(--font-display);margin:0}
+.brand .sub{margin:6px 0 0;font-size:12.5px;line-height:1.6;color:var(--side-muted)}
+.nav{margin-top:22px;display:flex;flex-direction:column;gap:2px}
+.nav .grp{margin:16px 0 4px;font-size:12px;color:var(--side-muted);font-weight:600}
+.nav a{display:block;padding:7px 10px;border-radius:6px;color:var(--side-fg);text-decoration:none;font-size:14.5px}
+.nav a:hover{background:var(--side-line)}
+.nav a[aria-current="page"]{background:var(--side-active);font-weight:600}
+.main{min-width:0}
+.page{padding-block:28px 60px;max-width:1180px}
+h1.title{font:700 30px/1.25 var(--font-display);margin:0 0 4px;text-wrap:balance}
+h2{font-size:18px;font-weight:700;margin:30px 0 10px;text-wrap:balance}
+h3{font-size:15.5px;font-weight:600;margin:0}
+p{margin:0 0 10px}
+.lead{color:var(--muted);margin:0 0 18px;max-width:68ch}
+.muted{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px}
+.chip{font-size:13px;padding:3px 10px;border-radius:4px;background:var(--surface);border:1px solid var(--line)}
+.chip b{font-weight:600}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
+.grid{display:grid;gap:14px;min-width:0}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.notice{padding:12px 14px;border-radius:8px;background:var(--warn-soft);color:var(--fg);border:1px solid var(--warn);margin:0 0 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.notice p{margin:0;flex:1 1 280px}
+.btn{cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);border-radius:6px;padding:7px 14px;font-weight:600;min-height:36px}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.danger{border-color:var(--crit);color:var(--crit);background:transparent}
+.btn.danger.armed{background:var(--crit);color:#fff}
+.btn.sm{padding:3px 10px;min-height:28px;font-size:13px}
+.btn:hover{filter:brightness(1.07)}
+.pill{display:inline-block;font-size:12.5px;font-weight:600;padding:1px 9px;border-radius:4px;white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.crit{background:var(--crit-soft);color:var(--crit)}
+.pill.none,.pill.info{background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:0 8px;border-radius:4px;border:1px solid currentColor;white-space:nowrap}
+.tag.doc{color:var(--good)} .tag.est{color:var(--accent)} .tag.usr{color:var(--warn)} .tag.none{color:var(--muted)}
+.ex{display:inline-block;font-size:11.5px;padding:0 6px;border-radius:4px;background:var(--surface2);color:var(--muted);border:1px dashed var(--muted);white-space:nowrap}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:0;border:1px solid var(--line);border-radius:8px;background:var(--surface);margin:0 0 16px;overflow:hidden}
+.kpi{padding:12px 14px;border-inline-start:1px solid var(--line);min-width:0}
+.kpi:first-child{border-inline-start:0}
+.kpi .l{font-size:12.5px;color:var(--muted)}
+.kpi .v{font-family:var(--font-mono);font-size:24px;font-weight:500;line-height:1.3;font-variant-numeric:tabular-nums}
+.kpi .v small{font-family:var(--font-body);font-size:13px;color:var(--muted);margin-inline-start:4px}
+.kpi .s{font-size:12.5px;color:var(--muted)}
+.cov{padding:10px 0;border-top:1px solid var(--line)}
+.cov:first-of-type{border-top:0}
+.cov-h{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+.barrow{display:grid;grid-template-columns:78px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:12.5px;margin-top:3px}
+.track{height:9px;background:var(--surface2);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.track i{display:block;height:100%}
+.track .b0{background:var(--muted);opacity:.55}
+.track .good{background:var(--good)} .track .warn{background:var(--warn)} .track .crit{background:var(--crit)} .track .none{background:var(--muted)}
+.val{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--muted)}
+.alerts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.alerts li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line)}
+.alerts li:first-child{border-top:0}
+.alerts .pill{flex:none;margin-top:2px}
+.stack{display:flex;height:14px;border-radius:3px;overflow:hidden;border:1px solid var(--line);background:var(--surface2)}
+.stack i{display:block;height:100%}
+.stack .doc{background:var(--good)} .stack .est{background:var(--accent)} .stack .usr{background:var(--warn)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px;font-size:13px;color:var(--muted)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:10px 14px}
+.field{display:flex;flex-direction:column;gap:3px;min-width:0}
+.field label,.lab{font-size:13px;color:var(--muted)}
+input,select,textarea{background:var(--surface2);border:1px solid var(--line);border-radius:6px;padding:6px 9px;min-height:36px;max-width:100%;min-width:0}
+input[type=number]{font-variant-numeric:tabular-nums}
+textarea{width:100%;min-height:140px;font-family:var(--font-mono);font-size:12.5px;direction:ltr;text-align:left}
+.seg{display:flex;flex-wrap:wrap;gap:0}
+.seg button{background:var(--surface2);border:1px solid var(--line);padding:6px 12px;cursor:pointer;min-height:36px;margin-inline-end:-1px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg);border-color:var(--accent);position:relative;z-index:1;font-weight:600}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface);max-width:100%}
+table{border-collapse:collapse;width:100%;min-width:780px}
+th,td{padding:7px 10px;text-align:right;border-top:1px solid var(--line);vertical-align:middle}
+thead th{border-top:0;font-size:12.5px;color:var(--muted);font-weight:600;background:var(--surface2);white-space:nowrap}
+td .u{font-size:12.5px;color:var(--muted);margin-inline-start:4px}
+td input[type=number]{width:100px}
+td input[type=text]{width:100%;min-width:130px}
+.addrow{margin-top:12px}
+.addrow .fields{align-items:end}
+.sub-sum{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.ccards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:14px}
+.ccard{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.ccard header{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin:0}
+.kv div{min-width:0}
+.kv dt{font-size:12.5px;color:var(--muted)}
+.kv dd{margin:0;font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:16px}
+.kv dd small{font-family:var(--font-body);font-size:12px;color:var(--muted)}
+.kv dd.bad{color:var(--crit)} .kv dd.ok{color:var(--good)}
+.spark{width:100%;height:auto;display:block;direction:ltr}
+.spark text{fill:var(--muted);font-size:10px;font-family:var(--font-body)}
+.act{font-size:14px;margin:0}
+.report{white-space:pre-wrap;font-size:14px;margin:0}
+.unit{display:flex;flex-direction:column;gap:6px;min-width:0}
+.unit .n{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.unit .row{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.unit .fn{font-size:14px;margin:0}
+.unit .out{font-size:13px;color:var(--muted);margin:0}
+.unit a{font-size:13.5px;color:var(--accent);font-weight:600}
+.st-full{background:var(--good-soft);color:var(--good)} .st-part{background:var(--warn-soft);color:var(--warn)} .st-design{background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.tree,.tree ul{list-style:none;margin:0;padding:0}
+.tree ul{margin-inline-start:14px;border-inline-start:2px solid var(--line);padding-inline-start:14px}
+.tree li{padding:5px 0}
+.tree b{font-weight:600}
+.phase{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.phase:first-of-type{border-top:0}
+.phase .pn{font-family:var(--font-display);font-size:22px;color:var(--accent);min-width:34px}
+.phase h3{margin-bottom:4px}
+.phase ul{margin:0;padding-inline-start:18px}
+.formula{font-family:var(--font-display);font-size:20px;line-height:1.6;padding:14px 16px;background:var(--accent-soft);border-radius:8px;text-wrap:balance}
+.audit{list-style:none;margin:0;padding:0}
+.audit li{display:flex;gap:14px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.audit li:first-child{border-top:0}
+.audit time{font-family:var(--font-mono);font-size:12.5px;color:var(--muted);flex:none;direction:ltr;white-space:nowrap}
+.err{color:var(--crit);font-size:13.5px}
+.okmsg{color:var(--good);font-size:13.5px}
+@media (max-width:860px){
+  .app{display:block}
+  .side{position:sticky;top:env(safe-area-inset-top,0px);height:auto;z-index:30;overflow:visible}
+  .side-in{padding-block:10px 8px}
+  .brand{display:flex;align-items:baseline;gap:12px}
+  .brand .mark{font-size:26px}
+  .brand .sub{display:none}
+  .nav{margin-top:6px;flex-direction:row;overflow-x:auto;gap:4px;padding-bottom:4px}
+  .nav .grp{display:none}
+  .nav a{white-space:nowrap;padding:6px 11px}
+  .page{padding-block:18px 48px}
+  h1.title{font-size:25px}
+  .kpi{border-inline-start:0;border-top:1px solid var(--line)}
+  .kpi:first-child{border-top:0}
+}
+.layers{display:flex;flex-direction:column;gap:4px}
+.layer{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px}
+.layer .ln{font-family:var(--font-display);font-size:34px;line-height:1;color:var(--accent);min-width:30px}
+.layer h3{margin-bottom:2px}
+.layer .en{font-family:var(--font-mono);font-size:12.5px;color:var(--muted);direction:ltr;text-align:right;margin:0 0 8px}
+.layer p{margin:0 0 6px;font-size:14.5px}
+.layer .lab2{font-size:12.5px;color:var(--muted)}
+.layer .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.down{text-align:center;color:var(--muted);font-size:20px;line-height:1.1}
+.alts td:first-child{font-weight:600}
+.alt-note{font-size:13.5px}
+.sens th,.sens td{text-align:center}
+@media (prefers-reduced-motion:no-preference){.track i{transition:width .35s ease}}
+</style>
+<div id="root"></div>
+<script>
+document.documentElement.lang='ar';document.documentElement.dir='rtl';
+/*#CORE*/
+const KEY='qawaher.v3';
+const LV={full:'تشغيل كامل',essential:'Essential — الوظائف الحيوية',minimal:'حد أدنى'};
+const SECT={gov:'حكومي',private:'خاص',strategic:'استراتيجي'};
+const SCOPE={all:'الكل — حكومية وخاصة واستراتيجية',gov:'حكومية فقط',strategic:'استراتيجية فقط',private:'خاصة فقط'};
+const TAGS={doc:'موثق',est:'تقديري',usr:'مدخل مستخدم'};
+const ITYPE={hospital:'مستشفى',bakery:'مخبز',energy:'محطة طاقة',telecom:'اتصالات',other:'أخرى'};
+const PRE={
+  none:{name:'بدون أزمة (خط الأساس)',duration:0,importLoss:0,surge:0,start:0,targets:'all'},
+  port:{name:'توقف ميناء رئيسي',duration:30,importLoss:60,surge:0,start:0,targets:'all'},
+  supply:{name:'انقطاع سلاسل الإمداد العالمية',duration:45,importLoss:70,surge:0,start:0,targets:'all'},
+  fuel:{name:'نقص الوقود والطاقة',duration:40,importLoss:50,surge:0,start:0,targets:['fuel']},
+  disaster:{name:'كارثة طبيعية',duration:14,importLoss:30,surge:20,start:0,targets:'all'},
+  econ:{name:'أزمة اقتصادية ونقص عملة صعبة',duration:90,importLoss:40,surge:0,start:0,targets:'all'},
+  long:{name:'أزمة ممتدة طوال أفق التدبير',duration:270,importLoss:30,surge:0,start:0,targets:'all'},
+  custom:{name:'سيناريو مخصص',duration:30,importLoss:50,surge:0,start:0,targets:'all'}
+};
+function num(x){const n=parseFloat(x);return isFinite(n)?n:0}
+function uid(){return Math.random().toString(36).slice(2,9)}
+function daysAgo(n){return new Date(Date.now()-n*864e5).toISOString().slice(0,10)}
+function ageDays(iso){const t=new Date(iso+'T12:00:00').getTime();return isFinite(t)?Math.max(0,Math.floor((Date.now()-t)/864e5)):0}
+function seed(){
+  const d0=daysAgo(0),d3=daysAgo(3),old=daysAgo(52);
+  const R=(o)=>Object.assign({id:uid(),ex:true},o);
+  const POP=108000000,k=POP/1e6,K=(x)=>Math.round(x*k);
+  return {
+    v:1,
+    settings:{pop:POP,days:270,level:'essential',scope:'all',warnDays:45,critDays:20,staleDays:30},
+    scenario:{kind:'port',label:'الميناء X',duration:30,importLoss:60,surge:0,start:0,targets:'all'},
+    comms:[
+      {id:'wheat',name:'قمح / دقيق',unit:'طن',base:'كجم',cls:'حرجة',coef:{full:0.50,essential:0.40,minimal:0.35},tag:'est',
+        method:'الاستهلاك اليومي للفرد من الدقيق المكافئ. يُستبدل بإحصاءات التموين المعتمدة عند توفرها.',
+        source:'إنتاج محلي واستيراد',alt:'تنويع مناشئ الاستيراد، ودقيق مخلوط بحبوب بديلة',shelf:'6–12 شهرًا بظروف تخزين مناسبة'},
+      {id:'rice',name:'أرز',unit:'طن',base:'كجم',cls:'حيوية',coef:{full:0.09,essential:0.07,minimal:0.05},tag:'est',
+        method:'استهلاك يومي تقديري للفرد. يُستبدل ببيانات الاستهلاك الرسمية.',
+        source:'إنتاج محلي مع قيود المياه، واستيراد',alt:'مخزون حبوب بديلة ومناشئ استيراد إضافية',shelf:'12 شهرًا وأكثر'},
+      {id:'oil',name:'زيوت الطعام',unit:'طن',base:'كجم',cls:'حيوية',coef:{full:0.035,essential:0.025,minimal:0.018},tag:'est',
+        method:'استهلاك يومي تقديري للفرد من الزيوت النباتية. يُستبدل ببيانات رسمية.',
+        source:'استيراد غالبًا مع عصر محلي',alt:'زيوت بديلة من مناشئ مختلفة',shelf:'6–12 شهرًا'},
+      {id:'sugar',name:'سكر',unit:'طن',base:'كجم',cls:'حيوية',coef:{full:0.07,essential:0.05,minimal:0.04},tag:'est',
+        method:'استهلاك يومي تقديري للفرد. يُستبدل ببيانات رسمية.',
+        source:'إنتاج محلي واستيراد',alt:'سكر خام للتكرير المحلي',shelf:'سنة وأكثر'},
+      {id:'meds',name:'أدوية منقذة للحياة',unit:'ألف جرعة',base:'جرعة',cls:'حرجة',coef:{full:0.25,essential:0.20,minimal:0.15},tag:'est',
+        method:'وحدة علاجية يومية للفرد. تُبنى لاحقًا على قائمة الأدوية الأساسية المعتمدة.',
+        source:'تصنيع محلي بمواد خام مستوردة',alt:'بدائل علاجية مكافئة من القائمة الأساسية',shelf:'تختلف حسب الصنف وتُدار بتاريخ الصلاحية'},
+      {id:'fuel',name:'وقود ومشتقاته',unit:'م³',base:'لتر',cls:'حرجة',coef:{full:0.90,essential:0.50,minimal:0.30},tag:'est',
+        method:'مستوى Essential يعني تشغيل الخدمات الحيوية فقط، وليس التشغيل الاقتصادي الكامل.',
+        source:'إنتاج محلي واستيراد',alt:'غاز طبيعي وطاقة بديلة للمنشآت الحيوية',shelf:'عدة أشهر مع إدارة الدوران'},
+      {id:'lpg',name:'أسطوانات غاز البوتاجاز',unit:'ألف أسطوانة',base:'أسطوانة',cls:'حيوية',coef:{full:0.022,essential:0.017,minimal:0.012},tag:'est',
+        method:'عدد الأسطوانات اليومي للفرد (نحو أسطوانة لكل أسرة كل أسبوعين تقريبًا). تقديري.',
+        source:'إنتاج محلي واستيراد',alt:'غاز طبيعي للمنازل، وتوسيع شبكات الغاز',shelf:'غير محدد الصلاحية، ويخضع لاشتراطات السلامة'},
+      {id:'hygiene',name:'مواد النظافة والتعقيم',unit:'طن',base:'كجم',cls:'حيوية',coef:{full:0.010,essential:0.007,minimal:0.005},tag:'est',
+        method:'صابون ومنظفات ومعقمات للفرد يوميًا. تقديري.',
+        source:'تصنيع محلي بخامات مستوردة جزئيًا',alt:'خامات بديلة وتصنيع محلي إضافي',shelf:'12–24 شهرًا'},
+      {id:'feed',name:'أعلاف',unit:'طن',base:'كجم',cls:'حيوية',coef:{full:0.60,essential:0.45,minimal:0.30},tag:'est',
+        method:'مكافئ علفي لكل فرد لدعم سلسلة البروتين الحيواني.',
+        source:'ذرة وصويا مستوردة وإنتاج محلي',alt:'مخلفات زراعية معالجة',shelf:'3–6 أشهر'},
+      {id:'water',name:'مياه / معالجة',unit:'م³',base:'لتر',cls:'حرجة',coef:{full:50,essential:15,minimal:7.5},tag:'est',
+        method:'الحد الأدنى الإنساني المتداول للمياه نحو 15 لترًا للفرد يوميًا.',
+        source:'محطات المعالجة والشبكة',alt:'تحلية وصهاريج ومواد تعقيم',shelf:'المواد الكيميائية 6–12 شهرًا'}
+    ],
+    stock:[
+      R({wh:'مخزن تجريبي 1',comm:'wheat',qty:K(6000),sector:'gov',loss:1.5,date:d0,tag:'usr'}),
+      R({wh:'مخزن تجريبي 2',comm:'wheat',qty:K(4000),sector:'strategic',loss:2,date:d3,tag:'usr'}),
+      R({wh:'مخزن أرز تجريبي',comm:'rice',qty:K(14000),sector:'gov',loss:0.8,date:d0,tag:'usr'}),
+      R({wh:'مخزن زيوت تجريبي',comm:'oil',qty:K(2600),sector:'strategic',loss:0.5,date:d3,tag:'usr'}),
+      R({wh:'مخزن سكر تجريبي',comm:'sugar',qty:K(9000),sector:'gov',loss:0.4,date:d0,tag:'usr'}),
+      R({wh:'مستودع أدوية تجريبي',comm:'meds',qty:K(18000),sector:'gov',loss:0.5,date:d0,tag:'est'}),
+      R({wh:'خزان تجريبي أ',comm:'fuel',qty:K(3800),sector:'strategic',loss:0.3,date:d0,tag:'usr'}),
+      R({wh:'خزان تجريبي ب',comm:'fuel',qty:K(2200),sector:'private',loss:0.3,date:old,tag:'usr'}),
+      R({wh:'مستودع أسطوانات تجريبي',comm:'lpg',qty:K(2200),sector:'gov',loss:0.1,date:d0,tag:'usr'}),
+      R({wh:'مخزن نظافة تجريبي',comm:'hygiene',qty:K(1800),sector:'private',loss:0.5,date:d3,tag:'usr'}),
+      R({wh:'صومعة تجريبية',comm:'feed',qty:K(5000),sector:'private',loss:3,date:d3,tag:'usr'}),
+      R({wh:'خزان مياه تجريبي',comm:'water',qty:K(6000000),sector:'gov',loss:0.2,date:d0,tag:'est'})
+    ],
+    sup:[
+      R({name:'إنتاج محلي (مثال)',comm:'wheat',perDay:K(120),origin:'local',date:d0,tag:'est'}),
+      R({name:'موردون مستوردون (مثال)',comm:'wheat',perDay:K(230),origin:'import',date:d0,tag:'usr'}),
+      R({name:'مورد قمح بديل معتمد مسبقًا (مثال)',comm:'wheat',perDay:K(150),origin:'alt',lead:12,date:d0,tag:'usr'}),
+      R({name:'إنتاج أرز محلي (مثال)',comm:'rice',perDay:K(55),origin:'local',date:d0,tag:'est'}),
+      R({name:'أرز مستورد (مثال)',comm:'rice',perDay:K(10),origin:'import',date:d0,tag:'usr'}),
+      R({name:'عصر محلي (مثال)',comm:'oil',perDay:K(8),origin:'local',date:d0,tag:'est'}),
+      R({name:'زيوت مستوردة (مثال)',comm:'oil',perDay:K(16),origin:'import',date:d3,tag:'usr'}),
+      R({name:'مصانع سكر محلية (مثال)',comm:'sugar',perDay:K(40),origin:'local',date:d0,tag:'est'}),
+      R({name:'سكر خام مستورد (مثال)',comm:'sugar',perDay:K(8),origin:'import',date:d3,tag:'usr'}),
+      R({name:'تصنيع محلي (مثال)',comm:'meds',perDay:K(130),origin:'local',date:d0,tag:'est'}),
+      R({name:'استيراد (مثال)',comm:'meds',perDay:K(60),origin:'import',date:d3,tag:'usr'}),
+      R({name:'معامل تكرير محلية (مثال)',comm:'fuel',perDay:K(300),origin:'local',date:d0,tag:'est'}),
+      R({name:'شحنات مستوردة (مثال)',comm:'fuel',perDay:K(150),origin:'import',date:d0,tag:'usr'}),
+      R({name:'مورد وقود بديل (مثال)',comm:'fuel',perDay:K(80),origin:'alt',lead:10,date:d0,tag:'usr'}),
+      R({name:'معامل تعبئة محلية (مثال)',comm:'lpg',perDay:K(11),origin:'local',date:d0,tag:'est'}),
+      R({name:'غاز مستورد (مثال)',comm:'lpg',perDay:K(5),origin:'import',date:d3,tag:'usr'}),
+      R({name:'تصنيع نظافة محلي (مثال)',comm:'hygiene',perDay:K(6.5),origin:'local',date:d0,tag:'est'}),
+      R({name:'خامات مستوردة (مثال)',comm:'hygiene',perDay:K(0.6),origin:'import',date:d3,tag:'usr'}),
+      R({name:'إنتاج علفي محلي (مثال)',comm:'feed',perDay:K(150),origin:'local',date:d3,tag:'usr'}),
+      R({name:'حبوب علفية مستوردة (مثال)',comm:'feed',perDay:K(250),origin:'import',date:d3,tag:'usr'}),
+      R({name:'محطات معالجة (مثال)',comm:'water',perDay:K(14500),origin:'local',date:d0,tag:'est'})
+    ],
+    inst:[
+      R({name:'مستشفى تجريبي',type:'hospital',sector:'gov',comm:'meds',perDay:0.8,stock:12,date:d0,tag:'usr'}),
+      R({name:'مستشفى تجريبي',type:'hospital',sector:'gov',comm:'fuel',perDay:6,stock:40,date:d0,tag:'usr'}),
+      R({name:'مخبز تجريبي',type:'bakery',sector:'private',comm:'wheat',perDay:3,stock:24,date:d3,tag:'usr'}),
+      R({name:'محطة طاقة تجريبية',type:'energy',sector:'strategic',comm:'fuel',perDay:120,stock:2400,date:d0,tag:'est'}),
+      R({name:'مركز اتصالات تجريبي',type:'telecom',sector:'strategic',comm:'fuel',perDay:4,stock:60,date:d3,tag:'usr'})
+    ],
+    audit:[],
+    policy:{autoMaxPct:5,matrix:{'حرجة':['crit','high','med'],'حيوية':['high','med','low'],'كمالية':['med','low','low']}},
+    dec:[],lastBatch:null
+  };
+}
+let S=seed();
+function inScope(sec){return S.settings.scope==='all'||S.settings.scope===sec}
+function sumBy(arr,f,v){return arr.reduce((a,r)=>a+num(r[f]),0)}
+function sim(c,withScn,ov){
+  const st=S.settings,sc=ov?Object.assign({},S.scenario,{kind:'custom',targets:'all'},ov):S.scenario;
+  const demand0=st.pop*c.coef[st.level]/1000;
+  const stock0=S.stock.filter(r=>r.comm===c.id&&inScope(r.sector)).reduce((a,r)=>a+num(r.qty),0);
+  const inL=S.sup.filter(r=>r.comm===c.id&&r.origin==='local').reduce((a,r)=>a+num(r.perDay),0);
+  const inI=S.sup.filter(r=>r.comm===c.id&&r.origin==='import').reduce((a,r)=>a+num(r.perDay),0);
+  const applies=!!withScn&&sc.kind!=='none'&&(sc.targets==='all'||sc.targets.includes(c.id));
+  let stock=stock0,unmet=0,first=null,zero=null,required=0,supplied=0;
+  if(stock0<=0&&demand0>0)zero=0;
+  const series=[stock];
+  const NM=Math.max(1,Math.ceil(st.days/30)),reqM=Array(NM).fill(0),supM=Array(NM).fill(0),unmetM=Array(NM).fill(0),endM=Array(NM).fill(0);
+  for(let d=0;d<st.days;d++){
+    const on=applies&&d>=sc.start&&d<sc.start+sc.duration;
+    const dem=demand0*(1+(on?sc.surge/100:0));
+    const inf=inL+inI*(1-(on?sc.importLoss/100:0));
+    required+=dem;supplied+=inf;
+    const mi=Math.floor(d/30);reqM[mi]+=dem;supM[mi]+=inf;
+    const prev=stock;stock+=inf-dem;
+    if(stock<0){unmet-=stock;unmetM[mi]-=stock;stock=0;if(first===null){first=d+1;if(zero===null)zero=d+(dem>inf?prev/(dem-inf):0)}}
+    series.push(stock);endM[mi]=stock;
+  }
+  return {demand0,stock0,inL,inI,required,supplied,unmet,first,zero,end:stock,series,applies,reqM,supM,unmetM,endM};
+}
+function evidence(c){
+  const sl=S.stock.filter(r=>r.comm===c.id&&inScope(r.sector)),su=S.sup.filter(r=>r.comm===c.id);
+  if(!sl.length&&!su.length)return 'none';
+  const tags=[c.tag,...sl.map(r=>r.tag),...su.map(r=>r.tag)];
+  return tags.includes('usr')?'usr':tags.includes('est')?'est':'doc';
+}
+function statusOf(r){
+  if(r.ev==='none')return 'none';
+  const w=S.settings;let s='good';
+  if(r.cover<w.critDays)s='crit';else if(r.cover<w.warnDays)s='warn';
+  if(r.scn.first!==null){if(r.scn.first<=w.warnDays)s='crit';else if(s==='good')s='warn'}
+  if(r.base.first!==null&&s==='good')s='warn';
+  return s;
+}
+function computeAll(){
+  return S.comms.map(c=>{
+    const base=sim(c,false),scn=sim(c,true);
+    const cover=base.demand0>0?base.stock0/base.demand0:Infinity;
+    const r={c,base,scn,cover,ev:evidence(c)};
+    r.st=statusOf(r);
+    return r;
+  });
+}
+function allRows(){return [...S.stock,...S.sup,...S.inst]}
+function kpis(R){
+  const rows=allRows();
+  const tagged=[...rows.map(r=>r.tag),...S.comms.map(c=>c.tag)];
+  const total=tagged.length||1;
+  const docN=tagged.filter(t=>t==='doc').length,estN=tagged.filter(t=>t==='est').length,usrN=tagged.filter(t=>t==='usr').length;
+  let minR=null;R.forEach(r=>{if(r.ev!=='none'&&(minR===null||r.cover<minR.cover))minR=r});
+  const loc=R.filter(r=>r.base.demand0>0&&r.base.inL>=0.5*r.base.demand0).length;
+  const losses=S.stock.map(r=>num(r.loss));
+  const waste=losses.length?losses.reduce((a,b)=>a+b,0)/losses.length:null;
+  const ages=rows.map(r=>ageDays(r.date));
+  const oldest=ages.length?Math.max(...ages):null;
+  const stale=ages.filter(a=>a>S.settings.staleDays).length;
+  const bott=R.filter(r=>r.scn.first!==null).length;
+  return {total,docN,estN,usrN,docPct:Math.round(100*docN/total),minR,loc,waste,oldest,stale,bott,rows:rows.length};
+}
+function alertsOf(R,K){
+  const out=[],w=S.settings;
+  R.forEach(r=>{
+    const c=r.c,u=c.unit;
+    if(r.ev==='none'){out.push({s:'info',t:`لا توجد بيانات مخزون أو إمداد لسلعة «${c.name}».`});return}
+    if(r.cover<w.critDays)out.push({s:'crit',k:0,t:`مخزون «${c.name}» يكفي ${nf(r.cover)} يومًا فقط، وهو أقل من حد الخطر (${w.critDays} يومًا).`});
+    else if(r.cover<w.warnDays)out.push({s:'warn',k:1,t:`مخزون «${c.name}» يكفي ${nf(r.cover)} يومًا، وهو أقل من حد التنبيه (${w.warnDays} يومًا).`});
+    if(r.base.inL+r.base.inI<r.base.demand0)out.push({s:'warn',k:2,t:`الإمداد المؤكد من «${c.name}» أقل من الاحتياج اليومي بمقدار ${nf(r.base.demand0-r.base.inL-r.base.inI)} ${u} في اليوم.`});
+    if(r.scn.first!==null)out.push({s:r.scn.first<=w.warnDays?'crit':'warn',k:r.scn.first<=w.warnDays?0:1,t:`تحت سيناريو «${scTitle()}» ينفد مخزون «${c.name}» في اليوم ${r.scn.first}، والعجز ${nf(r.scn.unmet)} ${u}.`});
+  });
+  if(K.stale>0)out.push({s:'warn',k:3,t:`${K.stale} من السجلات لم تُحدَّث منذ أكثر من ${w.staleDays} يومًا.`});
+  if(K.rows>0&&K.docPct<50)out.push({s:'info',k:4,t:`الأرقام الموثقة ${K.docPct}% فقط من الإجمالي؛ الباقي تقديري أو مدخل مستخدم.`});
+  const pend=S.dec.filter(d=>d.status==='مسودة').length;
+  if(pend)out.push({s:'info',k:5,t:`${pend} قرار بانتظار المراجعة والاعتماد (صفحة القرارات والإجراءات).`});
+  const ord={crit:0,warn:1,info:2};
+  return out.sort((a,b)=>ord[a.s]-ord[b.s]);
+}
+function scTitle(){
+  const s=S.scenario;
+  if(s.kind==='none')return PRE.none.name;
+  if(s.kind==='port')return `توقف ${s.label||'الميناء X'} لمدة ${s.duration} يومًا`;
+  if(s.kind==='custom')return `${s.label||PRE.custom.name} لمدة ${s.duration} يومًا`;
+  return `${PRE[s.kind].name} لمدة ${s.duration} يومًا`;
+}
+function nf(n){
+  if(!isFinite(n))return '∞';
+  const a=Math.abs(n);
+  return Number(n).toLocaleString('en-US',{maximumFractionDigits:a<10?1:0});
+}
+
+const SEV={crit:'حرجة',high:'عالية',med:'متوسطة',low:'منخفضة',none:'لا عجز'};
+const ALT={redistribute:'إعادة التوزيع الداخلي',accelerate:'تسريع الإمداد من مورد بديل',reschedule:'إعادة جدولة الإنتاج أو الاستهلاك'};
+function fdate(d){return new Date(Date.now()+d*864e5).toISOString().slice(0,10)}
+function sensitivity(c){
+  return [0,25,50,75,100].map(p=>{const s=sim(c,true,{importLoss:p,duration:S.settings.days,start:0,surge:0});return {p,zero:s.zero,unmet:s.unmet}});
+}
+function sevOf(r){
+  if(r.scn.first===null)return 'none';
+  const w=S.settings.warnDays,band=r.scn.first<=w?0:(r.scn.first<=2*w?1:2);
+  const m=S.policy.matrix[r.c.cls]||S.policy.matrix['حرجة'];
+  return m[band];
+}
+function routeOf(r){
+  const sev=sevOf(r);if(sev==='none')return 'none';
+  const share=r.scn.required>0?100*r.scn.unmet/r.scn.required:0;
+  return (sev==='crit'||sev==='high'||share>S.policy.autoMaxPct)?'human':'auto';
+}
+function prescribe(r){
+  const sc=r.scn,days=S.settings.days;
+  if(sc.unmet<=0)return null;
+  let rem=sc.unmet;
+  const outScope=S.stock.filter(x=>x.comm===r.c.id&&!inScope(x.sector)).reduce((a,x)=>a+num(x.qty),0);
+  const instSur=S.inst.filter(x=>x.comm===r.c.id).reduce((a,x)=>a+Math.max(0,num(x.stock)-num(x.perDay)*days),0);
+  const av1=outScope+instSur,q1=Math.min(rem,av1);rem-=q1;
+  const bs=S.sup.filter(x=>x.comm===r.c.id&&x.origin==='alt').map(x=>({id:x.id,name:x.name,lead:num(x.lead),perDay:num(x.perDay),cap:num(x.perDay)*Math.max(0,days-num(x.lead))})).sort((a,b)=>a.lead-b.lead);
+  const av2=bs.reduce((a,x)=>a+x.cap,0);
+  let left=rem;const used=[];
+  bs.forEach(s=>{if(left<=0)return;const q=Math.min(left,s.cap);if(q>0){used.push(Object.assign({},s,{qty:q,late:Math.max(0,s.lead-sc.first)}));left-=q}});
+  const q2=rem-left;rem=left;
+  const span=Math.max(1,days-sc.first+1);
+  const cut=rem>0&&r.base.demand0>0?Math.min(100,100*rem/(r.base.demand0*span)):0;
+  return {q1,av1,outScope,instSur,q2,av2,used,q3:rem,cut,span};
+}
+function planText(r,p){
+  const u=r.c.unit,parts=[];
+  if(p.q1>0)parts.push(`نقل ${nf(p.q1)} ${u} من مخزون داخلي`);
+  if(p.used.length)parts.push(`استدعاء ${p.used.map(x=>`${x.name} (${nf(x.qty)} ${u})`).join('، ')}`);
+  if(p.q3>0)parts.push(`خفض الاستهلاك بنسبة ${nf(p.cut)}% من اليوم ${r.scn.first}`);
+  return parts.length?parts.join('، ثم '):'لا يوجد بديل مسجل؛ يلزم مصدر إمداد جديد أو توسيع قاعدة الموردين.';
+}
+function planRows(r){
+  const s=r.scn,out=[];let open=s.stock0;
+  for(let m=0;m<s.reqM.length;m++){
+    const d0=m*30,d1=Math.min(S.settings.days,d0+30),len=d1-d0;
+    const close=s.endM[m],dem=len>0?s.reqM[m]/len:0;
+    out.push({m:m+1,days:len,open,req:s.reqM[m],sup:s.supM[m],unmet:s.unmetM[m],close,cover:dem>0?close/dem:Infinity});
+    open=close;
+  }
+  return out;
+}
+function decStats(){
+  const d=S.dec.filter(x=>x.outcome),s=d.filter(x=>x.outcome==='success').length,p=d.filter(x=>x.outcome==='partial').length,f=d.filter(x=>x.outcome==='fail').length;
+  return {n:d.length,s,p,f,rate:d.length?Math.round(100*(s+0.5*p)/d.length):null};
+}
+/* ---- ingestion: canonical data model ---- */
+function norm(s){return String(s==null?'':s).toLowerCase().replace(/[ً-ٟـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/[\s_\-\.\/()]+/g,'')}
+const CANON={
+  wh:['المخزن','المستودع','اسم المخزن','Warehouse','WH','Location','Site','Storage Location'],
+  comm:['السلعة','الصنف','المادة','Item','Item Name','SKU','Commodity','Product','Material'],
+  qty:['رصيد متاح','الرصيد المتاح','مخزون فعلي','المخزون الفعلي','الرصيد','الكمية','Qty','Quantity','On Hand','Available','Available Balance','Stock','Balance'],
+  sector:['القطاع','Sector'],
+  loss:['التلف','نسبة التلف','الهدر','Loss','Waste','Spoilage'],
+  date:['التاريخ','آخر تحديث','تاريخ الجرد','Date','Updated','Last Update','As Of'],
+  perDay:['المعدل اليومي','الاستهلاك اليومي','الإمداد اليومي','Per Day','Daily','Daily Rate','Daily Capacity','Consumption'],
+  origin:['المصدر','نوع المصدر','Origin','Source Type','Supply Type'],
+  name:['الاسم','المورد','المؤسسة','Name','Supplier','Vendor','Institution','Entity'],
+  type:['النوع','نوع المؤسسة','Type','Institution Type'],
+  lead:['زمن التفعيل','مدة التوريد','Lead Time','Lead']
+};
+const CANON_LBL={wh:'المخزن',comm:'السلعة',qty:'الكمية المتاحة',sector:'القطاع',loss:'نسبة التلف',date:'تاريخ التحديث',perDay:'المعدل اليومي',origin:'نوع المصدر',name:'الاسم',type:'نوع المؤسسة',lead:'زمن التفعيل (يوم)'};
+const CANON_MAP=(()=>{const m={};Object.entries(CANON).forEach(([f,a])=>a.forEach(x=>{m[norm(x)]=f}));return m})();
+const COMMSYN={wheat:['قمح','دقيق','wheat','flour','خبز'],meds:['دواء','ادويه','meds','medic','pharma','drug'],fuel:['وقود','سولار','بنزين','مازوت','fuel','diesel','gasoline','petrol'],feed:['علف','feed','fodder'],water:['مياه','ماء','water'],oil:['زيت','oil'],sugar:['سكر','sugar'],rice:['ارز','rice'],lpg:['بوتاجاز','اسطوانه','غاز','lpg','cylinder'],hygiene:['نظافه','تعقيم','صابون','hygiene','soap','detergent']};
+function resolveComm(v){
+  const n=norm(v);if(!n)return null;
+  const hit=S.comms.find(c=>norm(c.id)===n||norm(c.name)===n);if(hit)return hit.id;
+  for(const [id,syn] of Object.entries(COMMSYN)){if(syn.some(s=>n.includes(norm(s))))return S.comms.some(c=>c.id===id)?id:null}
+  return null;
+}
+function resolveSector(v){const n=norm(v);if(!n)return null;if(n.includes('حكوم')||n.includes('gov')||n.includes('public'))return 'gov';if(n.includes('خاص')||n.includes('private'))return 'private';if(n.includes('استراتيج')||n.includes('strateg'))return 'strategic';return null}
+function resolveOrigin(v){const n=norm(v);if(!n)return null;if(n.includes('بديل')||n.includes('alt')||n.includes('backup'))return 'alt';if(n.includes('مستورد')||n.includes('استيراد')||n.includes('import')||n.includes('foreign'))return 'import';if(n.includes('محلي')||n.includes('local')||n.includes('domestic'))return 'local';return null}
+function resolveType(v){const n=norm(v);if(n.includes('مستشف')||n.includes('hospital'))return 'hospital';if(n.includes('مخبز')||n.includes('bakery'))return 'bakery';if(n.includes('طاق')||n.includes('كهرب')||n.includes('energy')||n.includes('power'))return 'energy';if(n.includes('اتصال')||n.includes('telecom'))return 'telecom';return 'other'}
+function toNum(s){const t=String(s==null?'':s).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[٬,\s]/g,'').replace('٫','.');const n=parseFloat(t);return isFinite(n)?n:NaN}
+function parseDate(v){if(!v)return daysAgo(0);const d=new Date(v);return isFinite(d.getTime())?d.toISOString().slice(0,10):daysAgo(0)}
+function splitLine(l,d){const out=[];let cur='',q=false;for(let i=0;i<l.length;i++){const ch=l[i];if(q){if(ch==='"'){if(l[i+1]==='"'){cur+='"';i++}else q=false}else cur+=ch}else if(ch==='"')q=true;else if(ch===d){out.push(cur);cur=''}else cur+=ch}out.push(cur);return out.map(x=>x.trim())}
+function parseCSV(t){
+  const lines=String(t).replace(/\r/g,'').split('\n').filter(l=>l.trim());
+  if(lines.length<2)return {head:[],rows:[]};
+  const hd=lines[0],d=['\t',';',','].map(x=>[x,hd.split(x).length]).sort((a,b)=>b[1]-a[1])[0][0];
+  return {head:splitLine(hd,d),rows:lines.slice(1).map(l=>splitLine(l,d))};
+}
+function buildImport(target,text,src,tag){
+  const res={map:[],unmapped:[],rows:[],bad:[],defaults:0};
+  const P=parseCSV(String(text||'').replace(/^﻿/,''));
+  if(!P.head.length){res.err='لا توجد بيانات. يلزم سطر عناوين وسطر واحد على الأقل.';return res}
+  const allowed={stock:['wh','comm','qty','sector','loss','date'],sup:['name','comm','perDay','origin','date','lead'],inst:['name','type','sector','comm','perDay','qty','date']}[target];
+  P.head.forEach((h,i)=>{const f=CANON_MAP[norm(h)];if(f&&allowed.includes(f)&&!res.map.some(m=>m.f===f))res.map.push({i,h,f});else res.unmapped.push(h)});
+  const col=f=>{const m=res.map.find(x=>x.f===f);return m?m.i:-1};
+  const need={stock:['comm','qty'],sup:['comm','perDay'],inst:['comm','perDay','qty']}[target];
+  const miss=need.filter(f=>col(f)<0);
+  if(miss.length){res.err='أعمدة مطلوبة غير موجودة: '+miss.map(f=>CANON_LBL[f]).join('، ')+'. العناوين الموجودة: '+P.head.join('، ');return res}
+  const batch=uid();
+  P.rows.forEach((cells,ri)=>{
+    const g=f=>{const i=col(f);return i<0?'':String(cells[i]==null?'':cells[i])};
+    const ln=ri+2,comm=resolveComm(g('comm'));
+    if(!comm){res.bad.push(`سطر ${ln}: سلعة غير معروفة «${g('comm')}»`);return}
+    const base={id:uid(),ex:false,src:src||'نظام خارجي',batch,tag,comm,date:parseDate(g('date'))};
+    const sec=()=>{const s=resolveSector(g('sector'));if(!s)res.defaults++;return s||'gov'};
+    if(target==='stock'){
+      const q=toNum(g('qty'));if(!(q>=0)){res.bad.push(`سطر ${ln}: كمية غير صالحة «${g('qty')}»`);return}
+      const l=toNum(g('loss'));
+      res.rows.push(Object.assign(base,{wh:g('wh')||'مخزن مستورد',qty:q,sector:sec(),loss:isNaN(l)?0:l}));
+    }else if(target==='sup'){
+      const q=toNum(g('perDay'));if(!(q>=0)){res.bad.push(`سطر ${ln}: إمداد يومي غير صالح «${g('perDay')}»`);return}
+      let o=resolveOrigin(g('origin'));if(!o){res.defaults++;o='local'}
+      const l=toNum(g('lead'));
+      res.rows.push(Object.assign(base,{name:g('name')||'مورد مستورد',perDay:q,origin:o,lead:isNaN(l)?0:l}));
+    }else{
+      const q=toNum(g('perDay')),s=toNum(g('qty'));
+      if(!(q>=0)||!(s>=0)){res.bad.push(`سطر ${ln}: استهلاك أو مخزون غير صالح`);return}
+      res.rows.push(Object.assign(base,{name:g('name')||'مؤسسة مستوردة',type:resolveType(g('type')),sector:sec(),perDay:q,stock:s}));
+    }
+  });
+  return res;
+}
+/*#ENDCORE*/
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+const ui={confirm:null,fb:null,flash:null,importErr:null,importText:'',ing:{target:'stock',src:'',tag:'usr',text:'',res:null}};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function adopt(o){
+  const d=seed();
+  S=Object.assign(d,o);S.settings=Object.assign(d.settings,o.settings);S.scenario=Object.assign(d.scenario,o.scenario);
+  S.policy=Object.assign(d.policy,o.policy||{});
+  if(!Array.isArray(S.audit))S.audit=[];
+  if(!Array.isArray(S.dec))S.dec=[];
+}
+function load(){
+  try{
+    const raw=localStorage.getItem(KEY);
+    if(!raw)return;
+    const o=JSON.parse(raw);
+    if(o&&o.v===1&&Array.isArray(o.stock)&&Array.isArray(o.sup)&&Array.isArray(o.inst)&&Array.isArray(o.comms)&&o.settings&&o.scenario){
+      adopt(o);
+    }
+  }catch(e){}
+}
+function log(msg){
+  S.audit.unshift({t:new Date().toISOString(),m:msg});
+  if(S.audit.length>200)S.audit.length=200;
+}
+function pill(st){
+  const L={good:'كافٍ',warn:'تحذير',crit:'حرج',none:'بيانات ناقصة'};
+  return `<span class="pill ${st}">${L[st]}</span>`;
+}
+function tagPill(t){return `<span class="tag ${t}">${TAGS[t]||'لا بيانات'}</span>`}
+function evPill(ev){
+  if(ev==='none')return `<span class="tag none">لا بيانات</span>`;
+  const L={doc:'موثق',est:'تقديري',usr:'يحتوي مدخلات مستخدم'};
+  return `<span class="tag ${ev}">${L[ev]}</span>`;
+}
+function exBadge(r){return (r.ex?'<span class="ex">مثال</span>':'')+(r.src?' <span class="ex">'+esc(r.src)+'</span>':'')}
+function opts(map,val){return Object.entries(map).map(([k,v])=>`<option value="${k}"${k===val?' selected':''}>${esc(v)}</option>`).join('')}
+function commOpts(val){return S.comms.map(c=>`<option value="${c.id}"${c.id===val?' selected':''}>${esc(c.name)}</option>`).join('')}
+function commById(id){return S.comms.find(c=>c.id===id)||{name:'—',unit:''}}
+function hasExamples(){return allRows().some(r=>r.ex)}
+
+/* ---------- Views ---------- */
+const NAV=[
+  ['التشغيل',[['dashboard','لوحة القيادة'],['plan','خطة التدبير (9 أشهر)'],['engine','محرك التخطيط للطوارئ']]],
+  ['البيانات الفعلية',[['stock','المخازن والمستودعات'],['suppliers','الإمداد والموردون'],['institutions','احتياجات المؤسسات'],['catalog','السلع واحتياج الفرد']]],
+  ['المعمارية والقرار',[['architecture','البنية المعمارية'],['ingest','التكامل واستيراد البيانات'],['decisions','القرارات والإجراءات']]],
+  ['الإطار',[['memo','المذكرة المفاهيمية'],['units','الهيكل الوظيفي'],['governance','الإطار القانوني والمؤسسي'],['roadmap','خارطة الطريق والمخاطر']]],
+  ['النظام',[['audit','سجل التدقيق'],['backup','الإعدادات والنسخ']]]
+];
+const VIEWS=NAV.flatMap(g=>g[1].map(x=>x[0]));
+function route(){const h=location.hash.slice(1);return VIEWS.includes(h)?h:'dashboard'}
+function settingsChips(){
+  const s=S.settings;
+  return `<div class="chips"><span class="chip">المؤسسات: <b>${esc(SCOPE[s.scope])}</b></span><span class="chip">الطاقة: <b>${esc(LV[s.level])}</b></span><span class="chip">التغطية: <b>${nf(s.pop)} نسمة</b></span><span class="chip">المدة: <b>${s.days} يومًا</b></span></div>`;
+}
+function exNotice(){
+  if(!hasExamples())return '';
+  return `<div class="notice"><p><b>البيانات الحالية أمثلة توضيحية</b> لتجربة المحرك، وليست جردًا فعليًا لمصر ولا دليلًا على توافر أي كمية. احذفها وأدخل بيانات الجهات الفعلية.</p><button class="btn" data-act="clearex" type="button">مسح الأمثلة وبدء الإدخال</button></div>`;
+}
+function vPlan(){
+  const R=computeAll(),w=S.settings,months=Math.ceil(w.days/30);
+  const rows=R.filter(r=>r.ev!=='none');
+  const full=w.days>=270;
+  const hdr=Array.from({length:months},(_,i)=>`<th style="text-align:center">ش${i+1}</th>`).join('');
+  const heat=rows.map(r=>{
+    const P=planRows(r);
+    const cells=P.map(x=>{
+      const st=x.unmet>0?'crit':(x.cover<w.warnDays?'warn':'good');
+      const t=x.unmet>0?'عجز':(isFinite(x.cover)?nf(x.cover)+' ي':'—');
+      return `<td style="text-align:center"><span class="pill ${st}">${t}</span></td>`;
+    }).join('');
+    return `<tr><td><b>${esc(r.c.name)}</b></td>${cells}</tr>`;
+  }).join('');
+  const sum=rows.map(r=>{
+    const s=r.scn,u=r.c.unit,p=prescribe(r),sev=sevOf(r);
+    const cov=s.required>0?Math.min(100,100*(s.required-s.unmet)/s.required):100;
+    const alt=p?(p.q1+p.q2):0;
+    return `<tr><td><b>${esc(r.c.name)}</b></td><td>${nf(s.required)} ${esc(u)}</td><td>${nf(s.stock0)}</td><td>${nf(s.supplied)}</td>
+      <td>${s.unmet>0?`<b>${nf(s.unmet)}</b>`:'—'}</td><td>${nf(cov)}%</td><td>${s.first===null?'لا نقص':`يوم ${s.first} (شهر ${Math.ceil(s.first/30)})`}</td>
+      <td>${p?nf(alt)+' '+esc(u):'—'}</td><td>${p?(p.q3>0?`<b>${nf(p.q3)}</b>`:'مغطى'):'—'}</td><td>${sev==='none'?'<span class="pill good">لا عجز</span>':`<span class="pill ${sev==='crit'||sev==='high'?'crit':'warn'}">${SEV[sev]}</span>`}</td></tr>`;
+  }).join('');
+  const det=rows.map(r=>{
+    const P=planRows(r),u=r.c.unit,s=r.scn;
+    const body=P.map(x=>`<tr><td>الشهر ${x.m}${x.days<30?` (${x.days} يومًا)`:''}</td><td>${nf(x.open)}</td><td>${nf(x.req)}</td><td>${nf(x.sup)}</td><td>${x.unmet>0?`<b>${nf(x.unmet)}</b>`:'—'}</td><td>${nf(x.close)}</td><td>${isFinite(x.cover)?nf(x.cover)+' يومًا':'—'}</td></tr>`).join('');
+    return `<details class="panel" style="margin-top:10px"${s.unmet>0?' open':''}><summary style="cursor:pointer"><b>${esc(r.c.name)}</b> <span class="muted">— ${esc(u)}</span> ${s.unmet>0?'<span class="pill crit">عجز '+nf(s.unmet)+' '+esc(u)+'</span>':'<span class="pill good">لا عجز</span>'} ${evPill(r.ev)}</summary>
+      <div class="tw" style="margin-top:10px"><table style="min-width:680px"><thead><tr><th>الفترة</th><th>رصيد أول الشهر</th><th>الاحتياج</th><th>الإمداد المؤكد</th><th>العجز (المطلوب تدبيره)</th><th>رصيد آخر الشهر</th><th>أيام التغطية</th></tr></thead><tbody>${body}</tbody></table></div></details>`;
+  }).join('');
+  const need=rows.reduce((a,r)=>a+(r.scn.unmet>0?1:0),0);
+  return `<h1 class="title">خطة التدبير لتسعة أشهر</h1>
+  <p class="lead">لكل سلعة معيشية وكل شهر: كم نحتاج، كم يصلنا فعلًا بعقود وأوامر شراء مؤكدة، وكم يلزم تدبيره من مصادر أخرى.</p>
+  ${settingsChips()}${exNotice()}
+  ${full?'':`<div class="notice"><p>أفق الخطة الحالي <b>${w.days} يومًا</b>. لتسعة أشهر كاملة اضبط «مدة الخطة» على 270 يومًا من صفحة الإعدادات والنسخ.</p></div>`}
+  <div class="kpis"><div class="kpi"><div class="l">الأفق</div><div class="v">${months}<small>أشهر</small></div><div class="s">${w.days} يومًا</div></div>
+    <div class="kpi"><div class="l">سلع يظهر فيها عجز</div><div class="v">${need}<small>من ${rows.length}</small></div><div class="s">${esc(scTitle())}</div></div>
+    <div class="kpi"><div class="l">السكان المشمولون</div><div class="v">${nf(w.pop/1e6)}<small>مليون</small></div><div class="s">رقم تقديري قابل للتعديل</div></div></div>
+  <section class="panel"><h2 style="margin-top:0">خريطة الأشهر</h2>
+    <p class="muted" style="font-size:13.5px">كل خلية تبيّن أيام التغطية في آخر الشهر، أو «عجز» إذا نفد المخزون خلال الشهر. الأحمر عجز، والأصفر تغطية أقل من حد التنبيه (${w.warnDays} يومًا).</p>
+    <div class="tw"><table style="min-width:640px"><thead><tr><th>السلعة</th>${hdr}</tr></thead><tbody>${heat||'<tr><td colspan="'+(months+1)+'" class="muted">لا بيانات.</td></tr>'}</tbody></table></div></section>
+  <section class="panel" style="margin-top:14px"><h2 style="margin-top:0">ملخص الأشهر التسعة</h2>
+    <p class="muted" style="font-size:13.5px">«تغطيه البدائل» مجموع ما يمكن تدبيره بإعادة التوزيع الداخلي ومن الموردين البدلاء المعتمدين مسبقًا. «المتبقي» يحتاج مصدرًا جديدًا أو خفضًا للاستهلاك.</p>
+    <div class="tw"><table style="min-width:980px"><thead><tr><th>السلعة</th><th>الاحتياج الكلي</th><th>المخزون الابتدائي</th><th>الإمداد المؤكد</th><th>العجز</th><th>التغطية</th><th>أول نقص</th><th>تغطيه البدائل</th><th>المتبقي</th><th>الخطورة</th></tr></thead><tbody>${sum}</tbody></table></div></section>
+  <h2>التفصيل الشهري لكل سلعة</h2>${det||'<p class="muted">لا بيانات.</p>'}
+  <p class="muted" style="font-size:13.5px;margin-top:14px">الأرقام مبنية على المعاملات والبيانات الموسومة في النظام، والأمثلة الحالية توضيحية. قرار الشراء أو السحب لا يصدر من هذه الصفحة؛ يمر بصفحة القرارات والإجراءات وفق مسار الاعتماد.</p>`;
+}
+function vDashboard(){
+  const R=computeAll(),K=kpis(R),A=alertsOf(R,K),w=S.settings;
+  const kp=`<div class="kpis">
+    <div class="kpi"><div class="l">أقل أيام تغطية (مخزون فقط)</div><div class="v">${K.minR?nf(K.minR.cover):'—'}<small>يوم</small></div><div class="s">${K.minR?esc(K.minR.c.name):'لا بيانات'}</div></div>
+    <div class="kpi"><div class="l">اختناقات متوقعة بالمحاكاة</div><div class="v">${K.bott}<small>من ${R.length}</small></div><div class="s">${esc(scTitle())}</div></div>
+    <div class="kpi"><div class="l">الأرقام الموثقة</div><div class="v">${K.docPct}<small>%</small></div><div class="s">من ${K.total} رقمًا مسجلًا</div></div>
+    <div class="kpi"><div class="l">سلع بإمداد محلي ≥ 50%</div><div class="v">${K.loc}<small>من ${R.length}</small></div><div class="s">من الاحتياج اليومي</div></div>
+    <div class="kpi"><div class="l">أقدم سجل لم يُحدَّث</div><div class="v">${K.oldest==null?'—':K.oldest}<small>يوم</small></div><div class="s">الحد ${w.staleDays} يومًا</div></div>
+  </div>`;
+  const cov=R.map(r=>{
+    const H=w.days;
+    const bw=(r.base.first===null?H:r.base.first)/H*100;
+    const sw=(r.scn.first===null?H:r.scn.first)/H*100;
+    const lbl=f=>f===null?`تكفي ${H} يومًا`:`تنفد يوم ${f}`;
+    return `<div class="cov"><div class="cov-h"><h3>${esc(r.c.name)}</h3><div class="pills">${pill(r.st)}${evPill(r.ev)}</div></div>
+      <div class="barrow"><span>بدون أزمة</span><div class="track"><i class="b0" style="width:${bw}%"></i></div><span class="val">${lbl(r.base.first)}</span></div>
+      <div class="barrow"><span>تحت السيناريو</span><div class="track"><i class="${r.st==='none'?'none':(r.scn.first===null?'good':(r.scn.first<=w.warnDays?'crit':'warn'))}" style="width:${sw}%"></i></div><span class="val">${lbl(r.scn.first)}</span></div>
+      <div class="barrow"><span>المخزون وحده</span><div class="track"><i class="b0" style="width:${Math.min(100,r.cover/H*100)}%"></i></div><span class="val">${isFinite(r.cover)?nf(r.cover)+' يومًا':'—'}</span></div>
+    </div>`;
+  }).join('');
+  const al=A.length?`<ul class="alerts">${A.map(a=>`<li><span class="pill ${a.s}">${{crit:'حرج',warn:'تحذير',info:'معلومة'}[a.s]}</span><span>${esc(a.t)}</span></li>`).join('')}</ul>`:'<p class="muted">لا تنبيهات عند العتبات الحالية.</p>';
+  const T=K.total;
+  return `<h1 class="title">لوحة القيادة</h1>
+  <p class="lead">صورة موحدة لأربعة أسئلة: كم لدينا، كم نستهلك، كم سنحتاج في السيناريو، وأين العجز ومتى.</p>
+  ${settingsChips()}${exNotice()}${kp}
+  <div class="grid g2">
+    <section class="panel"><h2 style="margin-top:0">أيام التغطية مقابل مدة الخطة (${w.days} يومًا)</h2>
+      <p class="muted" style="font-size:13.5px">السيناريو الحالي: ${esc(scTitle())}. الشريط الكامل يعني أن المخزون والإمداد يكفيان المدة كلها.</p>${cov}</section>
+    <section class="panel"><h2 style="margin-top:0">تنبيهات استباقية</h2>${al}
+      <h2>ثقة البيانات</h2>
+      <div class="stack" role="img" aria-label="توزيع الأرقام حسب الوسم"><i class="doc" style="width:${100*K.docN/T}%"></i><i class="est" style="width:${100*K.estN/T}%"></i><i class="usr" style="width:${100*K.usrN/T}%"></i></div>
+      <div class="legend"><span>${tagPill('doc')} ${K.docN}</span><span>${tagPill('est')} ${K.estN}</span><span>${tagPill('usr')} ${K.usrN}</span></div>
+      <p class="muted" style="font-size:13.5px;margin-top:10px">المدخل المستخدم غير مؤكد ولا يُستخدم في قرار حاسم إلا بعد وسمه وتوثيقه.</p>
+    </section>
+  </div>`;
+}
+function spark(r){
+  const W=320,H=100,pl=8,pr=8,pt=8,pb=18,days=S.settings.days;
+  const max=Math.max(1,...r.base.series,...r.scn.series);
+  const x=i=>W-pr-(W-pl-pr)*i/days;
+  const y=v=>pt+(H-pt-pb)*(1-v/max);
+  const path=s=>s.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)).join(' ');
+  const sc=S.scenario;
+  let win='';
+  if(r.scn.applies&&sc.duration>0){
+    const a=Math.min(days,sc.start),b=Math.min(days,sc.start+sc.duration);
+    if(b>a)win=`<rect x="${x(b).toFixed(1)}" y="${pt}" width="${(x(a)-x(b)).toFixed(1)}" height="${H-pt-pb}" fill="var(--warn-soft)"/>`;
+  }
+  const col=r.scn.first===null?'var(--good)':(r.scn.first<=S.settings.warnDays?'var(--crit)':'var(--warn)');
+  const mk=r.scn.first!==null?`<circle cx="${x(r.scn.first).toFixed(1)}" cy="${y(0).toFixed(1)}" r="4" fill="var(--crit)"/>`:'';
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" role="img" aria-label="مسار مخزون ${esc(r.c.name)} على مدى ${days} يومًا">
+    ${win}<line x1="${pl}" y1="${y(0)}" x2="${W-pr}" y2="${y(0)}" stroke="var(--line)" stroke-width="1"/>
+    <path d="${path(r.base.series)}" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <path d="${path(r.scn.series)}" fill="none" stroke="${col}" stroke-width="2.2"/>${mk}
+    <text x="${W-pr}" y="${H-4}" text-anchor="end">يوم 0</text><text x="${pl}" y="${H-4}" text-anchor="start">يوم ${days}</text>
+    <text x="${W-pr}" y="${pt+8}" text-anchor="end" dir="ltr">${nf(max)} ${esc(r.c.unit)}</text></svg>`;
+}
+function actText(r){
+  const c=r.c,u=c.unit;
+  if(r.ev==='none')return 'لا توجد بيانات مخزون أو إمداد لهذه السلعة. أدخلها في سجل المخازن وسجل الموردين أولًا.';
+  let t=r.scn.unmet>0?`المطلوب شراؤه أو إنتاجه أو تأمينه: ${nf(r.scn.unmet)} ${u} قبل اليوم ${r.scn.first}.`:`لا عجز متوقع خلال المدة. المتبقي في نهايتها ${nf(r.scn.end)} ${u}.`;
+  if(S.scenario.kind!=='none'&&r.base.unmet>0)t+=` حتى دون أزمة يظهر عجز ${nf(r.base.unmet)} ${u} بدءًا من اليوم ${r.base.first}.`;
+  if(r.ev==='usr')t+=' الحساب يعتمد على مدخلات غير مؤكدة، فهو للاسترشاد ولا يُعتمد في قرار حاسم قبل توثيقها.';
+  return t;
+}
+function reportText(R){
+  const s=S.settings;
+  let t=`تقرير العجز المتوقع — القواهر، تدبير المستلزمات المعيشية\nالسيناريو: ${scTitle()}\nالتغطية: ${nf(s.pop)} نسمة، ${s.days} يومًا، مستوى الطاقة: ${LV[s.level]}، نطاق المؤسسات: ${SCOPE[s.scope]}\n\n`;
+  R.forEach(r=>{
+    const u=r.c.unit;
+    t+=`• ${r.c.name} [${{doc:'موثق',est:'تقديري',usr:'مدخل مستخدم',none:'لا بيانات'}[r.ev]}]\n  الاحتياج ${nf(r.scn.required)} ${u}، المتاح ${nf(r.scn.stock0+r.scn.supplied)} ${u}، العجز ${nf(r.scn.unmet)} ${u}${r.scn.first!==null?`، نقطة التلاشي بعد ${nf(r.scn.zero)} يومًا (${fdate(r.scn.zero)})`:''}\n  ${actText(r)}\n`;
+  });
+  t+='\nتنبيه: هذا نموذج حسابي قابل للتعديل، وليس جردًا فعليًا لمصر ولا إثباتًا لتوافر الكميات.';
+  return t;
+}
+function vEngine(){
+  const R=computeAll(),s=S.settings,sc=S.scenario;
+  const tgt=sc.targets==='all'?S.comms.map(c=>c.id):sc.targets;
+  const chips=`<button type="button" class="btn sm ${sc.targets==='all'?'':'ghost'}" data-act="target" data-id="all">كل السلع</button> `+S.comms.map(c=>`<button type="button" class="btn sm ${sc.targets!=='all'&&tgt.includes(c.id)?'':'ghost'}" data-act="target" data-id="${c.id}">${esc(c.name)}</button>`).join(' ');
+  const uncertain=R.some(r=>r.ev==='usr'||r.ev==='none');
+  const nShort=R.filter(r=>r.scn.first!==null).length;
+  const summary=sc.kind==='none'?`بدون أزمة: ${R.filter(r=>r.base.first!==null).length} من ${R.length} سلع يظهر فيها عجز خلال ${s.days} يومًا.`:`عند «${scTitle()}» يظهر عجز في ${nShort} من ${R.length} سلع خلال ${s.days} يومًا.`;
+  return `<h1 class="title">محرك التخطيط للطوارئ</h1>
+  <p class="lead">محاكاة «ماذا لو»: يحسب المحرك الاحتياج من عدد السكان ومعاملات الفرد، ثم يطرح المخزون والإمداد المسجلين، ويُظهر العجز ومتى يبدأ.</p>
+  <section class="panel"><h2 style="margin-top:0">إعدادات الخطة</h2>
+    <div class="fields">
+      <div class="field"><label for="set-pop">عدد السكان المستهدف تغطيتهم</label><input id="set-pop" type="number" min="1000" step="1000" value="${s.pop}" data-k="set" data-f="pop"></div>
+      <div class="field"><label for="set-days">مدة التغطية (يوم)</label><input id="set-days" type="number" min="1" max="365" value="${s.days}" data-k="set" data-f="days"></div>
+      <div class="field"><label for="set-scope">نطاق المؤسسات</label><select id="set-scope" data-k="set" data-f="scope">${opts(SCOPE,s.scope)}</select></div>
+    </div>
+    <div class="field" style="margin-top:12px"><span class="lab">مستوى الطاقة</span><div class="seg" role="group" aria-label="مستوى الطاقة">${Object.entries(LV).map(([k,v])=>`<button type="button" data-act="level" data-id="${k}" aria-pressed="${s.level===k}">${esc(v)}</button>`).join('')}</div></div>
+    <h2>السيناريو</h2>
+    <div class="fields">
+      <div class="field"><label for="preset">نوع الأزمة</label><select id="preset">${Object.entries(PRE).map(([k,v])=>`<option value="${k}"${k===sc.kind?' selected':''}>${esc(v.name)}</option>`).join('')}</select></div>
+      ${sc.kind==='port'||sc.kind==='custom'?`<div class="field"><label for="sc-label">${sc.kind==='port'?'اسم الميناء':'اسم السيناريو'}</label><input id="sc-label" type="text" value="${esc(sc.label)}" data-k="sc" data-f="label"></div>`:''}
+      <div class="field"><label for="sc-duration">مدة الأزمة (يوم)</label><input id="sc-duration" type="number" min="0" max="365" value="${sc.duration}" data-k="sc" data-f="duration"></div>
+      <div class="field"><label for="sc-start">تبدأ في اليوم</label><input id="sc-start" type="number" min="0" max="365" value="${sc.start}" data-k="sc" data-f="start"></div>
+      <div class="field"><label for="sc-loss">الواردات المتأثرة (%)</label><input id="sc-loss" type="number" min="0" max="100" value="${sc.importLoss}" data-k="sc" data-f="importLoss"></div>
+      <div class="field"><label for="sc-surge">زيادة الطلب (%)</label><input id="sc-surge" type="number" min="0" max="300" value="${sc.surge}" data-k="sc" data-f="surge"></div>
+    </div>
+    <div class="field" style="margin-top:12px"><span class="lab">السلع المتأثرة</span><div style="display:flex;flex-wrap:wrap;gap:6px">${chips}</div></div>
+  </section>
+  ${exNotice()}
+  <h2>تقرير العجز المتوقع</h2>
+  <div class="panel" style="margin-bottom:14px"><p><b>${esc(summary)}</b></p>
+    ${uncertain?'<p class="muted" style="font-size:13.5px">بعض السلع تعتمد على مدخلات مستخدم غير مؤكدة أو بيانات ناقصة. النتائج للاسترشاد حتى تُوثّق.</p>':''}
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><button type="button" class="btn ghost" data-act="copyreport">نسخ التقرير نصًا</button>${ui.flash==='report'?'<span class="okmsg">تم النسخ</span>':''}</div>
+    ${ui.fb?`<div style="margin-top:10px"><label class="lab" for="fb-text">انسخ النص يدويًا:</label><textarea id="fb-text" readonly>${esc(ui.fb)}</textarea></div>`:''}
+  </div>
+  <div class="ccards">${R.map(r=>{
+    const u=r.c.unit;
+    return `<article class="ccard"><header><h3>${esc(r.c.name)}</h3><div class="pills">${pill(r.st)}${evPill(r.ev)}</div></header>
+      <dl class="kv">
+        <div><dt>الاحتياج خلال ${s.days} يومًا</dt><dd>${nf(r.scn.required)} <small>${esc(u)}</small></dd></div>
+        <div><dt>المتاح (مخزون + إمداد)</dt><dd>${nf(r.scn.stock0+r.scn.supplied)} <small>${esc(u)}</small></dd></div>
+        <div><dt>العجز المتوقع</dt><dd class="${r.scn.unmet>0?'bad':'ok'}">${nf(r.scn.unmet)} <small>${esc(u)}</small></dd></div>
+        <div><dt>نقطة التلاشي</dt><dd class="${r.scn.zero!==null?'bad':'ok'}">${r.scn.zero!==null?'بعد '+nf(r.scn.zero)+' يومًا <small>'+fdate(r.scn.zero)+'</small>':'لا يوجد'}</dd></div>
+      </dl>${spark(r)}
+      <p class="muted" style="font-size:12.5px;margin:0">الخط المتقطع: بدون أزمة. الخط المتصل: تحت السيناريو. الخلفية الملونة: فترة الأزمة.</p>
+      <p class="act">${esc(actText(r))}</p></article>`}).join('')}</div>`;
+}
+function tagSel(id,k,f,val){return `<select id="${id}" data-k="${k}" data-f="${f}" aria-label="الوسم">${opts(TAGS,val)}</select>`}
+function regHead(cols){return `<thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead>`}
+function delBtn(k,id){return `<button type="button" class="btn danger sm" data-act="del" data-k="${k}" data-id="${id}">حذف</button>`}
+function vStock(){
+  const sums=S.comms.map(c=>{const t=S.stock.filter(r=>r.comm===c.id&&inScope(r.sector)).reduce((a,r)=>a+num(r.qty),0);return `<span class="chip">${esc(c.name)}: <b>${nf(t)} ${esc(c.unit)}</b></span>`}).join('');
+  const rows=S.stock.map(r=>{const c=commById(r.comm),i='stock-'+r.id;return `<tr>
+    <td><input id="${i}-wh" type="text" value="${esc(r.wh)}" data-k="stock" data-id="${r.id}" data-f="wh" aria-label="المخزن"> ${exBadge(r)}</td>
+    <td><select id="${i}-comm" data-k="stock" data-id="${r.id}" data-f="comm" aria-label="السلعة">${commOpts(r.comm)}</select></td>
+    <td><input id="${i}-qty" type="number" min="0" step="any" value="${r.qty}" data-k="stock" data-id="${r.id}" data-f="qty" aria-label="الكمية"><span class="u">${esc(c.unit)}</span></td>
+    <td><select id="${i}-sector" data-k="stock" data-id="${r.id}" data-f="sector" aria-label="القطاع">${opts(SECT,r.sector)}</select></td>
+    <td><input id="${i}-loss" type="number" min="0" max="100" step="any" value="${r.loss}" data-k="stock" data-id="${r.id}" data-f="loss" aria-label="التلف" style="width:70px"></td>
+    <td><input id="${i}-date" type="date" value="${esc(r.date)}" data-k="stock" data-id="${r.id}" data-f="date" aria-label="آخر تحديث"></td>
+    <td>${tagSel(i+'-tag','stock',"tag",r.tag).replace('data-k="stock"',`data-k="stock" data-id="${r.id}"`)}</td>
+    <td>${delBtn('stock',r.id)}</td></tr>`}).join('');
+  return `<h1 class="title">المخازن والمستودعات</h1>
+  <p class="lead">سجل المخزون الفعلي. المحرك يجمع الكميات حسب السلعة ضمن نطاق المؤسسات المختار (${esc(SCOPE[S.settings.scope])}).</p>
+  ${exNotice()}<div class="sub-sum">${sums}</div>
+  <div class="tw"><table>${regHead(['المخزن','السلعة','الكمية','القطاع','تلف %','آخر تحديث','الوسم',''])}<tbody>${rows||'<tr><td colspan="8" class="muted">لا سجلات. أضف أول مخزن من النموذج أدناه.</td></tr>'}</tbody></table></div>
+  <form class="panel addrow" data-add="stock"><h3 style="margin-bottom:10px">إضافة مخزن</h3><div class="fields">
+    <div class="field"><label for="add-stock-wh">اسم المخزن</label><input id="add-stock-wh" name="wh" type="text" required></div>
+    <div class="field"><label for="add-stock-comm">السلعة</label><select id="add-stock-comm" name="comm">${commOpts('')}</select></div>
+    <div class="field"><label for="add-stock-qty">الكمية (بوحدة السلعة)</label><input id="add-stock-qty" name="qty" type="number" min="0" step="any" required></div>
+    <div class="field"><label for="add-stock-sector">القطاع</label><select id="add-stock-sector" name="sector">${opts(SECT,'gov')}</select></div>
+    <div class="field"><label for="add-stock-loss">تلف %</label><input id="add-stock-loss" name="loss" type="number" min="0" max="100" step="any" value="0"></div>
+    <div class="field"><label for="add-stock-date">تاريخ الجرد</label><input id="add-stock-date" name="date" type="date" value="${daysAgo(0)}"></div>
+    <div class="field"><label for="add-stock-tag">الوسم</label><select id="add-stock-tag" name="tag">${opts(TAGS,'usr')}</select></div>
+    <div class="field"><button class="btn" type="submit">إضافة</button></div></div></form>`;
+}
+function vSuppliers(){
+  const sums=S.comms.map(c=>{const l=S.sup.filter(r=>r.comm===c.id&&r.origin==='local').reduce((a,r)=>a+num(r.perDay),0),m=S.sup.filter(r=>r.comm===c.id&&r.origin==='import').reduce((a,r)=>a+num(r.perDay),0),al=S.sup.filter(r=>r.comm===c.id&&r.origin==='alt').reduce((a,r)=>a+num(r.perDay),0);return `<span class="chip">${esc(c.name)}: محلي <b>${nf(l)}</b> · مستورد <b>${nf(m)}</b>${al?` · بديل <b>${nf(al)}</b>`:''} ${esc(c.unit)}/يوم</span>`}).join('');
+  const rows=S.sup.map(r=>{const c=commById(r.comm),i='sup-'+r.id;return `<tr>
+    <td><input id="${i}-name" type="text" value="${esc(r.name)}" data-k="sup" data-id="${r.id}" data-f="name" aria-label="المورد"> ${exBadge(r)}</td>
+    <td><select id="${i}-comm" data-k="sup" data-id="${r.id}" data-f="comm" aria-label="السلعة">${commOpts(r.comm)}</select></td>
+    <td><input id="${i}-perDay" type="number" min="0" step="any" value="${r.perDay}" data-k="sup" data-id="${r.id}" data-f="perDay" aria-label="الإمداد اليومي"><span class="u">${esc(c.unit)}/يوم</span></td>
+    <td><select id="${i}-origin" data-k="sup" data-id="${r.id}" data-f="origin" aria-label="المصدر"><option value="local"${r.origin==='local'?' selected':''}>محلي</option><option value="import"${r.origin==='import'?' selected':''}>مستورد</option><option value="alt"${r.origin==='alt'?' selected':''}>بديل معتمد</option></select></td>
+    <td><input id="${i}-lead" type="number" min="0" step="any" value="${num(r.lead)}" data-k="sup" data-id="${r.id}" data-f="lead" aria-label="زمن التفعيل" style="width:80px"></td>
+    <td><input id="${i}-date" type="date" value="${esc(r.date)}" data-k="sup" data-id="${r.id}" data-f="date" aria-label="آخر تحديث"></td>
+    <td><select id="${i}-tag" data-k="sup" data-id="${r.id}" data-f="tag" aria-label="الوسم">${opts(TAGS,r.tag)}</select></td>
+    <td>${delBtn('sup',r.id)}</td></tr>`}).join('');
+  return `<h1 class="title">الإمداد والموردون</h1>
+  <p class="lead">الإمداد المؤكد يوميًا من كل مصدر. المحرك يعتبر المصدر «المستورد» معرّضًا للتعطل في السيناريوهات، ويبقي «المحلي» كما هو. المورد «البديل المعتمد» لا يدخل في الإمداد المؤكد، ويُستخدم في بدائل القرار فقط.</p>
+  ${exNotice()}<div class="sub-sum">${sums}</div>
+  <div class="tw"><table>${regHead(['المورد أو المصدر','السلعة','الإمداد اليومي','المصدر','زمن التفعيل (يوم)','آخر تحديث','الوسم',''])}<tbody>${rows||'<tr><td colspan="8" class="muted">لا سجلات. أضف أول مورد من النموذج أدناه.</td></tr>'}</tbody></table></div>
+  <form class="panel addrow" data-add="sup"><h3 style="margin-bottom:10px">إضافة مورد</h3><div class="fields">
+    <div class="field"><label for="add-sup-name">اسم المورد</label><input id="add-sup-name" name="name" type="text" required></div>
+    <div class="field"><label for="add-sup-comm">السلعة</label><select id="add-sup-comm" name="comm">${commOpts('')}</select></div>
+    <div class="field"><label for="add-sup-perDay">الإمداد اليومي المؤكد</label><input id="add-sup-perDay" name="perDay" type="number" min="0" step="any" required></div>
+    <div class="field"><label for="add-sup-origin">المصدر</label><select id="add-sup-origin" name="origin"><option value="local">محلي</option><option value="import">مستورد</option><option value="alt">بديل معتمد</option></select></div>
+    <div class="field"><label for="add-sup-lead">زمن التفعيل (يوم)</label><input id="add-sup-lead" name="lead" type="number" min="0" step="any" value="0"></div>
+    <div class="field"><label for="add-sup-date">تاريخ التحديث</label><input id="add-sup-date" name="date" type="date" value="${daysAgo(0)}"></div>
+    <div class="field"><label for="add-sup-tag">الوسم</label><select id="add-sup-tag" name="tag">${opts(TAGS,'usr')}</select></div>
+    <div class="field"><button class="btn" type="submit">إضافة</button></div></div></form>`;
+}
+function vInst(){
+  const scoped=S.inst.filter(r=>inScope(r.sector));
+  const rows=S.inst.map(r=>{
+    const c=commById(r.comm),i='inst-'+r.id,cov=num(r.perDay)>0?num(r.stock)/num(r.perDay):Infinity;
+    const st=cov<S.settings.critDays?'crit':cov<S.settings.warnDays?'warn':'good';
+    return `<tr${inScope(r.sector)?'':' style="opacity:.5"'}>
+    <td><input id="${i}-name" type="text" value="${esc(r.name)}" data-k="inst" data-id="${r.id}" data-f="name" aria-label="المؤسسة"> ${exBadge(r)}</td>
+    <td><select id="${i}-type" data-k="inst" data-id="${r.id}" data-f="type" aria-label="النوع">${opts(ITYPE,r.type)}</select></td>
+    <td><select id="${i}-sector" data-k="inst" data-id="${r.id}" data-f="sector" aria-label="القطاع">${opts(SECT,r.sector)}</select></td>
+    <td><select id="${i}-comm" data-k="inst" data-id="${r.id}" data-f="comm" aria-label="السلعة">${commOpts(r.comm)}</select></td>
+    <td><input id="${i}-perDay" type="number" min="0" step="any" value="${r.perDay}" data-k="inst" data-id="${r.id}" data-f="perDay" aria-label="الاستهلاك اليومي"><span class="u">${esc(c.unit)}/يوم</span></td>
+    <td><input id="${i}-stock" type="number" min="0" step="any" value="${r.stock}" data-k="inst" data-id="${r.id}" data-f="stock" aria-label="المخزون لدى المؤسسة"><span class="u">${esc(c.unit)}</span></td>
+    <td style="white-space:nowrap">${isFinite(cov)?nf(cov)+' يومًا':'—'} <span class="pill ${st}">${{good:'كافٍ',warn:'تحذير',crit:'حرج'}[st]}</span></td>
+    <td><select id="${i}-tag" data-k="inst" data-id="${r.id}" data-f="tag" aria-label="الوسم">${opts(TAGS,r.tag)}</select></td>
+    <td>${delBtn('inst',r.id)}</td></tr>`}).join('');
+  return `<h1 class="title">احتياجات المؤسسات</h1>
+  <p class="lead">مصفوفة احتياج المستشفيات والمخابز ومحطات الطاقة والاتصالات: الاستهلاك اليومي الفعلي والمخزون لدى كل جهة، وعدد الأيام التي تكفيها. ${scoped.length} من ${S.inst.length} سجلًا داخل النطاق المختار.</p>
+  ${exNotice()}
+  <div class="tw"><table style="min-width:980px">${regHead(['المؤسسة','النوع','القطاع','السلعة','الاستهلاك اليومي','المخزون لديها','أيام التغطية','الوسم',''])}<tbody>${rows||'<tr><td colspan="9" class="muted">لا سجلات. أضف أول مؤسسة من النموذج أدناه.</td></tr>'}</tbody></table></div>
+  <form class="panel addrow" data-add="inst"><h3 style="margin-bottom:10px">إضافة مؤسسة</h3><div class="fields">
+    <div class="field"><label for="add-inst-name">اسم المؤسسة</label><input id="add-inst-name" name="name" type="text" required></div>
+    <div class="field"><label for="add-inst-type">النوع</label><select id="add-inst-type" name="type">${opts(ITYPE,'hospital')}</select></div>
+    <div class="field"><label for="add-inst-sector">القطاع</label><select id="add-inst-sector" name="sector">${opts(SECT,'gov')}</select></div>
+    <div class="field"><label for="add-inst-comm">السلعة</label><select id="add-inst-comm" name="comm">${commOpts('')}</select></div>
+    <div class="field"><label for="add-inst-perDay">الاستهلاك اليومي</label><input id="add-inst-perDay" name="perDay" type="number" min="0" step="any" required></div>
+    <div class="field"><label for="add-inst-stock">المخزون لديها</label><input id="add-inst-stock" name="stock" type="number" min="0" step="any" required></div>
+    <div class="field"><label for="add-inst-tag">الوسم</label><select id="add-inst-tag" name="tag">${opts(TAGS,'usr')}</select></div>
+    <div class="field"><button class="btn" type="submit">إضافة</button></div></div></form>`;
+}
+function vCatalog(){
+  return `<h1 class="title">السلع واحتياج الفرد</h1>
+  <p class="lead">كتالوج السلع الحرجة والحيوية وبطاقة كل سلعة، مع معاملات الاستهلاك للفرد في اليوم لكل مستوى طاقة. كل معامل موسوم بمصدره، والقيم الابتدائية تقديرية وتُستبدل بالأرقام الرسمية المعتمدة.</p>
+  <div class="notice"><p>معاملات الاستهلاك هنا قيم ابتدائية تقديرية لتجربة النموذج. لم تُستخرج من نظام رسمي معتمد، ويجب مراجعتها مع الجهة المختصة بكل سلعة.</p></div>
+  <div class="ccards">${S.comms.map(c=>{const i='comm-'+c.id;return `<article class="ccard">
+    <header><h3>${esc(c.name)}</h3><div class="pills"><span class="pill info">${esc(c.cls)}</span>${tagPill(c.tag)}</div></header>
+    <div class="fields" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+      ${['full','essential','minimal'].map(l=>`<div class="field"><label for="${i}-${l}">${{full:'تشغيل كامل',essential:'Essential',minimal:'حد أدنى'}[l]}</label><input id="${i}-${l}" type="number" min="0" step="any" value="${c.coef[l]}" data-k="coef" data-id="${c.id}" data-f="${l}"></div>`).join('')}
+    </div>
+    <p class="muted" style="font-size:12.5px;margin:0">${esc(c.base)} للفرد في اليوم. وحدة التسجيل في السجلات: ${esc(c.unit)}.</p>
+    <div class="fields"><div class="field"><label for="${i}-cls">التصنيف</label><select id="${i}-cls" data-k="comm" data-id="${c.id}" data-f="cls">${['حرجة','حيوية','كمالية'].map(x=>`<option${x===c.cls?' selected':''}>${x}</option>`).join('')}</select></div>
+    <div class="field"><label for="${i}-tag">وسم المعاملات</label><select id="${i}-tag" data-k="comm" data-id="${c.id}" data-f="tag">${opts(TAGS,c.tag)}</select></div></div>
+    <div class="field"><label for="${i}-source">المصدر</label><input id="${i}-source" type="text" value="${esc(c.source)}" data-k="comm" data-id="${c.id}" data-f="source"></div>
+    <div class="field"><label for="${i}-alt">البديل</label><input id="${i}-alt" type="text" value="${esc(c.alt)}" data-k="comm" data-id="${c.id}" data-f="alt"></div>
+    <div class="field"><label for="${i}-shelf">مدة الصلاحية</label><input id="${i}-shelf" type="text" value="${esc(c.shelf)}" data-k="comm" data-id="${c.id}" data-f="shelf"></div>
+    <p class="muted" style="font-size:12.5px;margin:0">منهج المعامل: ${esc(c.method)}</p></article>`}).join('')}</div>`;
+}
+const UNITS=[
+  ['إدارة الأزمات واستمرارية الأعمال','تعريف السيناريوهات، تفعيل خطط الطوارئ، إدارة غرفة الأزمات','خطة استجابة لكل سيناريو','part','سيناريوهات جاهزة وتقرير توصية وقرارات مقترحة بمسودات. غرفة الأزمات غير مبنية.','decisions'],
+  ['قاعدة بيانات السلع والبضائع','تصنيف السلع (حرجة/حيوية/كمالية)، بطاقة لكل سلعة (مصدر، بديل، مدة صلاحية)','كتالوج وطني للسلع','full','يعمل على خمس مجموعات تجريبية.','catalog'],
+  ['احتياجات السكان','معادلات استهلاك للفرد/اليوم، تفصيل جغرافي وفئوي','مصفوفة احتياج','part','معاملات الفرد حسب مستوى الطاقة. التفصيل الجغرافي والفئوي غير مبني.','catalog'],
+  ['احتياجات المؤسسات','احتياج المستشفيات، المخابز، محطات الطاقة، الاتصالات','مصفوفة احتياج مؤسسي','full','سجل استهلاك ومخزون لكل جهة مع أيام التغطية.','institutions'],
+  ['المخازن والمستودعات','خريطة المخازن، السعة، التبريد، الصلاحية، معدل الدوران، الهدر والتلف','سجل مخزون حقيقي','part','سجل الكميات والتلف وتاريخ التحديث. الخريطة والسعة والتبريد غير مبنية.','stock'],
+  ['النقل وسلاسل الإمداد','طرق بديلة، أسطول، موانئ ومنافذ، زمن انتقال، نقاط اختناق','خريطة إمداد مرنة','design','لا يوجد نموذج للطرق والموانئ. يظهر أثرها في السيناريو فقط كنسبة واردات متأثرة.','suppliers'],
+  ['الإنتاج والبدائل المحلية','القدرة الإنتاجية الوطنية، الموردون، بدائل الاستيراد','خطة توطين وتغطية','part','سجل الموردين بمصدر محلي أو مستورد ومؤشر التوطين.','suppliers'],
+  ['محرك التخطيط الوطني للطوارئ','محاكاة What-if: ماذا لو توقف الميناء X لـ 30 يومًا؟','تقرير عجز متوقع + توصية','full','محاكاة يومية ونقطة التلاشي وحساسية تأخر الإمداد.','engine'],
+  ['وحدة البيانات والحاكمية','تصنيف البيانات (موثق/تقديري/مدخل مستخدم)، الجودة، التحديث','مؤشر ثقة البيانات','full','وسم كل رقم ومؤشر ثقة وعمر التحديث.','dashboard'],
+  ['الحوكمة والمساءلة','صلاحيات، اعتماد الأرقام، تفتيش، تدقيق','تقارير التزام','part','سجل تدقيق وسجل قرارات بحالات الاعتماد في هذا المتصفح. الصلاحيات الحقيقية تحتاج خادمًا.','decisions'],
+  ['الإنذار المبكر','مؤشرات خطر (سعر، مخزون، شحن) وعتبات تنبيه','تنبيهات استباقية','part','تنبيهات المخزون والإمداد وحداثة البيانات. الأسعار والشحن غير مرتبطة.','dashboard'],
+  ['الأمن السيبراني والسرية','تصنيف سري، صلاحيات وصول، سجل اطلاع','سياسة حماية بيانات','design','لا يمكن تنفيذه في صفحة تعمل داخل المتصفح. يلزم نظام خادم وسياسة رسمية.','governance']
+];
+function vUnits(){
+  const L={full:'نموذج يعمل',part:'جزئي',design:'تصميم فقط'};
+  const cnt=k=>UNITS.filter(u=>u[3]===k).length;
+  return `<h1 class="title">الهيكل الوظيفي</h1>
+  <p class="lead">اثنتا عشرة وحدة. الحالة المبينة هي حالة هذا النموذج التجريبي: ${cnt('full')} وحدات تعمل، و${cnt('part')} جزئية، و${cnt('design')} تصميم فقط.</p>
+  <div class="notice"><p><b>تنبيه تنفيذي:</b> هذا النموذج هو التصميم الوظيفي مع محرك حسابي قابل للتجربة. ليس منظومة وطنية منشأة أو مختبرة، ولا يمثل جردًا فعليًا لمصر.</p></div>
+  <div class="grid g3">${UNITS.map((u,i)=>`<article class="panel unit"><div class="row"><span class="n">${i+1}</span><span class="pill st-${u[3]}">${L[u[3]]}</span></div><h3>${esc(u[0])}</h3><p class="fn">${esc(u[1])}</p><p class="out">المخرج: ${esc(u[2])}</p><p class="out">${esc(u[4])}</p><a href="#${u[5]}">فتح</a></article>`).join('')}</div>
+  <h2>تصنيف البيانات: أهم قاعدة في التصميم</h2>
+  <div class="panel"><p>يُوسم كل رقم بواحد من ثلاثة:</p>
+  <p>${tagPill('doc')} مستخرج من نظام رسمي معتمد (وزارة أو هيئة).</p>
+  <p>${tagPill('est')} مبني على معادلة هندسية موثقة المنهج.</p>
+  <p>${tagPill('usr')} غير مؤكد، ولا يُستخدم في قرارات حاسمة إلا بوسم.</p></div>`;
+}
+function vMemo(){
+  return `<h1 class="title">المذكرة المفاهيمية</h1>
+  <p class="lead">المنظومة الوطنية للمخزون الاستراتيجي واستمرارية الإمداد.</p>
+  <div class="panel"><h2 style="margin-top:0">المشكلة</h2>
+    <p>لا تملك الدولة حاليًا صورة موحدة ومحدثة تجيب على أربعة أسئلة في وقت واحد:</p>
+    <ul><li>كم لدينا؟</li><li>كم نستهلك؟</li><li>كم سنحتاج في السيناريو الفلاني؟</li><li>أين العجز ومتى يحدث؟</li></ul>
+    <p>غياب هذه الصورة يحوّل إدارة الأزمات من قرار مبني على بيانات إلى ردّ فعل متأخر، ويجعل الدولة عرضة لأي اختناق في سلاسل الإمداد أو الطاقة أو الشحن.</p></div>
+  <h2>الفكرة في سطر واحد</h2>
+  <div class="formula">«القواهر» طبقة تنسيق وقرار فوق الأنظمة القائمة، تربط المخزون المتاح والإمداد المؤكد والاستهلاك الحقيقي بمحرك سيناريوهات يحسب العجز قبل حدوثه.</div>
+  <h2>ما هي وما ليست</h2>
+  <div class="tw"><table style="min-width:560px"><thead><tr><th>ليست</th><th>بل هي</th></tr></thead><tbody>
+    <tr><td>نظامًا يستبدل المخزونات القائمة</td><td>طبقة تنسيق عليا تربطها</td></tr>
+    <tr><td>جردًا فعليًا لمصر</td><td>نظامًا لقياس الفجوة بين المتاح والمطلوب</td></tr>
+    <tr><td>قائمة سلع طويلة</td><td>محرك قرار يرتب الأولويات</td></tr>
+    <tr><td>مشروعًا تقنيًا فقط</td><td>مشروع مؤسسي وقانوني وتقني</td></tr></tbody></table></div>
+  <h2>النطاق المقترح للمرحلة التجريبية</h2>
+  <div class="panel"><ul style="margin:0;padding-inline-start:18px">
+    <li>التغطية: السكان المقيمون في مصر (الرقم الافتراضي تقديري ويُستبدل ببيانات الجهاز المركزي للتعبئة العامة والإحصاء). للتجربة المصغرة يمكن ضبطه على مليون نسمة.</li>
+    <li>المدة: 270 يومًا (تسعة أشهر) لخطة تدبير المستلزمات المعيشية، ويمكن ضبطها حتى 365 يومًا. التجربة المصغرة 90 يومًا قابلة للرفع إلى 180.</li>
+    <li>السلع: 3–5 مجموعات حرجة فقط (قمح/دقيق، أدوية منقذة للحياة، وقود ومشتقاته، أعلاف، مياه/معالجة).</li>
+    <li>الجهات: عدد محدود من المؤسسات الحكومية والاستراتيجية، وتضاف الجهات الخاصة تدريجيًا.</li>
+    <li>مستوى الطاقة: Essential، أي تشغيل الوظائف الحيوية فقط وليس التشغيل الاقتصادي الكامل.</li></ul></div>
+  <h2>القيمة المضافة المتوقعة</h2>
+  <div class="panel"><ul style="margin:0;padding-inline-start:18px"><li>الانتقال من «التخزين» إلى «إدارة العجز».</li><li>تقليل زمن القرار في الأزمة من أسابيع إلى ساعات.</li><li>كشف الاختناقات (نقل، تبريد، مستودعات، موردين) قبل أن تصبح أزمة.</li><li>أساس علمي لشراء أو إنتاج ما نحتاجه فعلًا، لا ما نظنه.</li></ul></div>
+  <h2>ما نحتاجه من صانع القرار: ثلاثة قرارات فقط</h2>
+  <div class="panel"><ol style="margin:0;padding-inline-start:20px"><li>إعلان التبني واعتماد المنظومة كمشروع وطني.</li><li>تحديد الجهة المالكة (مقترح: تتبع مجلس الوزراء).</li><li>تفويض بإعداد الأساس القانوني الذي يُلزم الجهات بالإفصاح عن بيانات المخزون والاستهلاك.</li></ol></div>`;
+}
+function vGov(){
+  return `<h1 class="title">الإطار القانوني والمؤسسي</h1>
+  <p class="lead">النجاح مرهون بثلاثة عوامل بالترتيب: جهة مالكة واضحة، إلزام قانوني بالبيانات، ثم بناء النموذج التجريبي تدريجيًا.</p>
+  <h2 style="margin-top:6px">الأساس التشريعي: ثلاث طبقات</h2>
+  <div class="tw"><table style="min-width:640px"><thead><tr><th>الطبقة</th><th>الأداة</th><th>المضمون</th></tr></thead><tbody>
+    <tr><td>الأولى</td><td>قرار جمهوري أو قرار رئيس الوزراء</td><td>إنشاء المنظومة وتحديد الجهة المالكة والاختصاصات</td></tr>
+    <tr><td>الثانية</td><td>قانون أو تعديل تشريعي قائم</td><td>إلزام الجهات العامة والخاصة الاستراتيجية بتقديم بيانات المخزون والاستهلاك دوريًا، وتحديد عقوبة الامتناع أو تضليل البيانات</td></tr>
+    <tr><td>الثالثة</td><td>لائحة تنفيذية وقرارات وزارية</td><td>المعايير الفنية: الوحدات، الدورية، التصنيف، الصلاحيات، السرية</td></tr></tbody></table></div>
+  <div class="notice" style="margin-top:12px"><p><b>النقطة الحاكمة:</b> بدون الطبقة الثانية يبقى النظام «لوحة تقديرات» لا «نظام إمداد»، لأنه لن يُلزم أحدًا بالإفصاح.</p></div>
+  <div class="grid g2"><section class="panel"><h2 style="margin-top:0">الهيكل المؤسسي المقترح</h2>
+    <ul class="tree"><li><b>مجلس الوزراء</b><ul><li><b>لجنة وزارية عليا</b> (سياسة القرار)<ul><li><b>الجهة المالكة:</b> وحدة أو مركز وطني للقواهر<ul><li>إدارة التخطيط والسيناريو</li><li>إدارة البيانات والمخزون</li><li>إدارة الإمداد والنقل</li><li>إدارة الحوكمة والتدقيق</li><li>إدارة الأمن السيبراني</li></ul></li></ul></li></ul></li></ul></section>
+  <section class="panel"><h2 style="margin-top:0">ملامح التنظيم</h2><ul style="margin:0;padding-inline-start:18px">
+    <li>اللجنة الوزارية: الدفاع/الداخلية، الزراعة، الصحة، البترول، التموين، النقل، التخطيط، المالية، البيئة.</li>
+    <li>العلاقة بالأنظمة القائمة: تنسيق لا استبدال. كل وزارة تبقى مالكة لبياناتها، والقواهر مستهلك وموحّد لها.</li>
+    <li>نقطة اتصال واحدة في كل جهة، مسؤولة عن الإمداد بالبيانات والتصديق عليها.</li></ul></section></div>
+  <h2>المبادئ القانونية الحاكمة</h2>
+  <div class="grid g2">
+    <div class="panel"><h3>المسؤولية عن البيانات</h3><p class="muted" style="margin:4px 0 0">الجهة المسؤولة قانونًا عن رقم مخزونها، لا القواهر.</p></div>
+    <div class="panel"><h3>السرية المتفاوتة</h3><p class="muted" style="margin:4px 0 0">تصنيف ثلاثي: عام، مقيد، سري.</p></div>
+    <div class="panel"><h3>المساءلة</h3><p class="muted" style="margin:4px 0 0">تدقيق دوري مستقل، وإحالة أي تضليل بيانات للمساءلة.</p></div>
+    <div class="panel"><h3>الحماية المدنية</h3><p class="muted" style="margin:4px 0 0">بيانات القطاع الخاص لا تُستخدم لغير أغراض الطوارئ.</p></div></div>`;
+}
+function vRoadmap(){
+  const R=computeAll(),K=kpis(R);
+  const kr=[
+    ['نسبة تغطية أيام المخزون','كم يومًا نتحمل؟',K.minR?`${nf(K.minR.cover)} يومًا (${K.minR.c.name})`:'—'],
+    ['دقة البيانات','نسبة الأرقام الموثقة من الإجمالي',`${K.docPct}%`],
+    ['زمن تحديث البيانات','يومي / أسبوعي / شهري',K.oldest==null?'—':`أقدم سجل: ${K.oldest} يومًا`],
+    ['زمن الاستجابة لقرار إمداد','ساعة / يوم','يُقاس عند التشغيل الفعلي'],
+    ['نسبة السلع الحرجة ذات بديل محلي','التوطين',`${K.loc} من ${R.length}`],
+    ['نسبة الفاقد والهدر في المخزون','جودة الإدارة',K.waste==null?'—':`${nf(K.waste)}% متوسط المسجل`],
+    ['الاختناقات المكتشفة قبل حدوثها','قيمة الإنذار المبكر',`${K.bott} بالمحاكاة`],
+    ['نجاح قرارات الإمداد','قرارات معتمدة سُجّلت نتيجتها (التغذية الراجعة)',(()=>{const d=decStats();return d.n?`${d.rate}% من ${d.n} قرارات`:'لا نتائج مسجلة بعد'})()]
+  ];
+  const risks=[['عدم إلزامية البيانات','المنظومة تبقى نظرية','تشريع وعقوبات'],['تضارب مع الأنظمة القائمة','هدر مزدوج','مبدأ التكامل لا الاستبدال'],['بيانات غير دقيقة أو متضاربة','قرارات خاطئة','تصنيف البيانات وتدقيق'],['تكلفة التخزين','عبء مالي','عقود إطارية بدل الشراء الكامل'],['تسريب البيانات','خطر أمني','تصنيف سري وصلاحيات'],['التلف وفقدان الصلاحية','هدر المخزون','إدارة دوران وتبريد وتفتيش'],['الفساد في المشتريات','تشويه النتائج','حوكمة وتدقيق مستقل']];
+  const phases=[['0','التأسيس','3–6 أشهر',['القرار المؤسسي، الجهة المالكة، فريق نواة.','حصر السلع الحرجة (3–5 مجموعات) وبناء البطاقة القياسية.','تصميم الحوكمة وسياسة السرية.']],
+    ['1','التجربة','6–12 شهرًا',['3–5 سلع، مليون نسمة، 90 يومًا، عدد محدود من الجهات.','تشغيل محرك السيناريو ببيانات تقديرية وموثقة، وقواعد التوسع بعد نجاح اختبار العجز المتوقع.']],
+    ['2','التوسع','12–24 شهرًا',['إضافة السلع الحيوية، والتوسع الجغرافي، وربط الأنظمة القائمة.','تفعيل الإنذار المبكر ومؤشرات الأداء.']],
+    ['3','النضج','بعد ذلك',['تغطية وطنية، تكامل كامل، تدريب دوري، تمارين محاكاة سنوية.']]];
+  return `<h1 class="title">خارطة الطريق والمخاطر</h1>
+  <p class="lead">أربع مراحل، ثم مؤشرات الأداء بقيمتها الحالية في هذا النموذج، وسجل المخاطر الرئيسية.</p>
+  <section class="panel">${phases.map(p=>`<div class="phase"><div class="pn">${p[0]}</div><div><h3>المرحلة ${p[0]}: ${p[1]} <span class="muted" style="font-weight:400">(${p[2]})</span></h3><ul>${p[3].map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`).join('')}</section>
+  <h2>مؤشرات الأداء</h2>
+  <div class="tw"><table style="min-width:600px"><thead><tr><th>المؤشر</th><th>الدلالة</th><th>القيمة الحالية</th></tr></thead><tbody>${kr.map(r=>`<tr><td>${r[0]}</td><td class="muted">${r[1]}</td><td>${esc(r[2])}</td></tr>`).join('')}</tbody></table></div>
+  <h2>سجل المخاطر الرئيسية</h2>
+  <div class="tw"><table style="min-width:600px"><thead><tr><th>الخطر</th><th>الأثر</th><th>العلاج</th></tr></thead><tbody>${risks.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}</tbody></table></div>
+  <h2>التوصية النهائية</h2>
+  <div class="panel"><p>لا تبدأ بـ«الكل». ابدأ بـ:</p><div class="formula">3 سلع حرجة × مليون نسمة × 90 يومًا × عدد محدود من الجهات</div>
+  <p style="margin-top:12px">هذا الحجم قابل للتمويل، وقابل للقياس، وقابل للدفاع أمام صانع القرار، وينتج أول تقرير عجز حقيقي يمكن البناء عليه. البدء صغيرًا ومقاسًا هو الطريق الوحيد لتحويل الفكرة إلى نظام فعلي يصمد أمام اختبار الأزمات.</p></div>`;
+}
+function vAudit(){
+  return `<h1 class="title">سجل التدقيق</h1>
+  <p class="lead">سجل بتغييرات هذه الجلسة محفوظ في هذا المتصفح فقط. التدقيق الرسمي يحتاج سجلًا على خادم لا يستطيع المستخدم تعديله.</p>
+  <div class="panel">${S.audit.length?`<ul class="audit">${S.audit.map(a=>`<li><time>${esc(new Date(a.t).toLocaleString('en-GB',{hour12:false}))}</time><span>${esc(a.m)}</span></li>`).join('')}</ul>`:'<p class="muted" style="margin:0">لا تغييرات مسجلة بعد. أي إضافة أو حذف أو تعديل للسيناريو سيظهر هنا.</p>'}</div>`;
+}
+function vBackup(){
+  const w=S.settings,json=JSON.stringify(S,null,2);
+  return `<h1 class="title">الإعدادات والنسخ</h1>
+  <p class="lead">عتبات الإنذار، ونسخ احتياطي للبيانات المُدخلة.</p>
+  <section class="panel"><h2 style="margin-top:0">عتبات الإنذار المبكر</h2><div class="fields">
+    <div class="field"><label for="set-critDays">حد الخطر (أيام تغطية)</label><input id="set-critDays" type="number" min="1" value="${w.critDays}" data-k="set" data-f="critDays"></div>
+    <div class="field"><label for="set-warnDays">حد التنبيه (أيام تغطية)</label><input id="set-warnDays" type="number" min="1" value="${w.warnDays}" data-k="set" data-f="warnDays"></div>
+    <div class="field"><label for="set-staleDays">أقصى عمر للسجل بلا تحديث (يوم)</label><input id="set-staleDays" type="number" min="1" value="${w.staleDays}" data-k="set" data-f="staleDays"></div></div></section>
+  <section class="panel" style="margin-top:14px"><h2 style="margin-top:0">نسخة احتياطية</h2>
+    <p class="muted">البيانات محفوظة في هذا المتصفح فقط. انسخ النص أدناه واحفظه في مكان آمن، وألصقه في خانة الاستيراد لاستعادته.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px"><button type="button" class="btn" data-act="copyjson">نسخ البيانات</button>${ui.flash==='json'?'<span class="okmsg">تم النسخ</span>':''}</div>
+    <label class="lab" for="export-text">البيانات الحالية</label><textarea id="export-text" readonly>${esc(json)}</textarea>
+    <h2>استيراد</h2>
+    <label class="lab" for="import-text">ألصق نسخة سابقة هنا</label><textarea id="import-text">${esc(ui.importText)}</textarea>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px"><button type="button" class="btn" data-act="import">استيراد</button>${ui.importErr?`<span class="err">${esc(ui.importErr)}</span>`:''}</div>
+  </section>
+  <section class="panel" style="margin-top:14px"><h2 style="margin-top:0">إعادة الضبط</h2>
+    <p class="muted">يعيد البيانات التجريبية والإعدادات الأصلية ويحذف كل ما أُدخل.</p>
+    <button type="button" class="btn danger ${ui.confirm==='reset'?'armed':''}" data-act="reset">${ui.confirm==='reset'?'اضغط مرة أخرى للتأكيد':'إعادة الضبط'}</button></section>`;
+}
+
+const EVL={doc:'موثق',est:'تقديري',usr:'مدخل مستخدم',none:'لا بيانات'};
+const SEVCLS={crit:'crit',high:'warn',med:'info',low:'none'};
+function alertText(r,p,sev,route){
+  const c=r.c,u=c.unit,s=r.scn;
+  return `تنبيه موجّه — ${c.name}\nالمشكلة: ينفد مخزون ${c.name} بعد ${nf(s.zero)} يومًا (${fdate(s.zero)}) تحت سيناريو «${scTitle()}»، والعجز المتوقع ${nf(s.unmet)} ${u}.\nالحل المقترح: ${planText(r,p)}\nالأثر عند التجاهل: عجز ${nf(s.unmet)} ${u} خلال ${S.settings.days} يومًا، وانقطاع ما يعتمد على ${c.name} من خدمات السكان والمؤسسات.\nدرجة الخطورة: ${SEV[sev]} · مسار القرار: ${route==='human'?'يتطلب اعتمادًا بشريًا':'مؤهل للاعتماد دون لجنة'}\nجودة البيانات: ${EVL[r.ev]}`;
+}
+function poText(d){
+  const c=commById(d.comm);
+  return `${d.alt==='accelerate'?'مسودة أمر شراء':'مسودة قرار تشغيلي'}\nالسلعة: ${c.name}\nالإجراء: ${ALT[d.alt]||d.alt}\n${d.detail}\nالكمية: ${nf(d.qty)} ${c.unit}\nالسبب: عجز متوقع ${nf(d.unmet)} ${c.unit} تحت سيناريو «${d.scn}»${d.zero==null?'':`، ونقطة التلاشي بعد ${nf(d.zero)} يومًا`}\nدرجة الخطورة: ${SEV[d.sev]} · المسار: ${d.route==='human'?'يتطلب اعتمادًا بشريًا':'مؤهل للاعتماد دون لجنة'}\nالحالة: ${d.status}\nملاحظة: مسودة نصية لم تُرسل إلى أي نظام (ERP أو غيره)، وتحتاج مراجعة المسؤول واعتمادها.`;
+}
+function vArch(){
+  const L={full:'نموذج يعمل',part:'جزئي',design:'تصميم فقط'};
+  const layers=[
+    ['1','طبقة التكامل وجمع البيانات','Integration & Ingestion Layer','ربط المنظومة بالأنظمة المختلفة: المستودعات، المشتريات، المبيعات، خطوط الإنتاج.','موصلات قياسية، بروتوكولات نقل البيانات الفورية، وواجهات برمجة التطبيقات (APIs).','part','استيراد دفعي من ملفات CSV مع مطابقة تلقائية لأسماء الحقول. الموصلات الحية وAPIs غير مبنية.','ingest'],
+    ['2','طبقة المستودع الموحد','Unified Operational Data Layer','توحيد مصطلحات البيانات (Canonical Data Model): ما يُسمّى «رصيد متاح» في نظام قد يُسمّى «مخزون فعلي» في نظام آخر. تنقّي الطبقة البيانات وتطابقها لتصبح مصدر الحقيقة الوحيد (Single Source of Truth).','تنقية ومطابقة لحظية للبيانات.','part','قاموس موحد للحقول والقيم، ووسم لكل رقم ومصدره. البيانات محفوظة في متصفحك وليست قاعدة بيانات مركزية، والمطابقة عند الاستيراد وليست لحظية.','ingest'],
+    ['3','محرك السيناريوهات والتنبؤ: عقل المنظومة','Scenario & Predictive Engine','استقبال مدخلات المخزون والإمداد والاستهلاك، وتطبيق نماذج محاكاة What-if لاستشراف فجوات العجز المستقبلية قبل وقوعها بفترة زمنية كافية.','نماذج محاكاة وحسابات احتمالات.','full','محاكاة يومية ونقطة التلاشي (Deficit Horizon) وحساسية تأخر الإمداد. النموذج حتمي: لا يحسب احتمالات ولا يتعلم آليًا.','engine'],
+    ['4','طبقة اتخاذ القرار والعرض','Decision & Orchestration Layer','تحويل التنبؤات إلى قرارات وتوصيات تشغيلية واضحة.','لوحات تحكم ذكية، نظام تنبيهات مبكرة، إطلاق مسارات عمل آلية.','part','مصفوفة الخطورة وسياسة الاعتماد والبدائل الثلاثة ومسودات الأوامر وسجل القرارات. لا يُرسل شيئًا إلى أي نظام خارجي.','decisions']
+  ];
+  const mech=[
+    ['الربط المباشر عبر APIs (RESTful / GraphQL)','للأنظمة الحديثة التي تتيح تبادل البيانات بمرونة عند حدوث أي تغيير (Real-time).','design','يحتاج خادمًا وصلاحيات وصول إلى الأنظمة.'],
+    ['التقاط التغيير في قواعد البيانات (CDC)','للأنظمة المغلقة التي لا توفر واجهات برمجة: تُراقب التغييرات في قاعدة البيانات الأصلية وتُنقل فورًا دون ضغط على أداء النظام الأصلي.','design','يحتاج وصولًا إلى قواعد بيانات الأنظمة المصدرية.'],
+    ['التزامن المجدول أو اللحظي (Batch vs. Event-Driven)','بيانات الاستهلاك والمخزون الحرج تُربط بتدفق أحداث لحظي مثل Apache Kafka، وجداول الإمداد طويلة الأجل تُزامَن عبر دورات تحديث مجدولة.','part','الدفعي يعمل يدويًا عبر استيراد CSV. اللحظي والمجدول تصميم فقط.']
+  ];
+  const cyc=[
+    ['المدخلات الحية','مراقبة معدل الاستهلاك الفعلي مقارنة بالمتوسط التاريخي، ومتابعة حالة الإمداد المؤكد (أوامر الشراء المعتمدة ومواعيد وصولها).','part','الإمداد المؤكد يؤخذ من سجل الموردين. المقارنة بالمتوسط التاريخي غير مبنية.'],
+    ['النمذجة الرياضية','حساب «نقطة التلاشي» (Deficit Horizon): اللحظة الزمنية التي يتقاطع فيها المخزون المتناقص مع حجم الاستهلاك المستقبلي إذا تأخر الإمداد بنسبة معينة.','full','يعمل في المحرك مع جدول حساسية لتأخر الإمداد.'],
+    ['المخرجات الاستباقية','قبل وصول المخزون للمستوى الحرج، تُصدر المنظومة قرارًا أو توصية فورية: إعادة توجيه شحنة، تعديل جدول التوريد، أو تفعيل مورد بديل.','part','توصيات ومسودات قرارات. لا تنفيذ فعلي لإعادة توجيه الشحنات.']
+  ];
+  const stack=layers.map((l,i)=>`<article class="layer"><div class="ln">${l[0]}</div><div><h3>${l[1]}</h3><p class="en">${l[2]}</p><p>${l[3]}</p><p class="lab2">التقنيات المقترحة: ${l[4]}</p><div class="row"><span class="pill st-${l[5]}">${L[l[5]]}</span><span style="font-size:14px">${l[6]}</span></div><p style="margin:8px 0 0"><a href="#${l[7]}">فتح</a></p></div></article>${i<layers.length-1?'<div class="down" aria-hidden="true">↓</div>':''}`).join('');
+  return `<h1 class="title">البنية المعمارية</h1>
+  <p class="lead">طبقة التنسيق والقرار فوق الأنظمة التشغيلية القائمة، بمبدأ «التكامل غير التداخلي» (Non-invasive Integration).</p>
+  <div class="panel"><p style="margin:0">بناء طبقة عابرة للأنظمة تجمع البيانات وتحلل وتتخذ القرار، دون الحاجة لتغيير أو استبدال الأنظمة القديمة (مثل ERP أو WMS).</p></div>
+  <div class="notice" style="margin-top:14px"><p><b>تنبيه تنفيذي:</b> الحالة المبينة لكل طبقة هي حالة هذا النموذج التجريبي. لا يتصل بأي نظام ERP أو WMS حقيقي، وكل بياناته تُدخل يدويًا أو تُستورد من ملفات.</p></div>
+  <h2>الهيكل المعماري الطبقي (Layered Architecture)</h2>
+  <div class="layers">${stack}</div>
+  <h2>آليات ربط الأنظمة التشغيلية الحالية</h2>
+  <div class="tw"><table style="min-width:680px"><thead><tr><th>الآلية</th><th>الاستخدام</th><th>الحالة في هذا النموذج</th></tr></thead><tbody>${mech.map(m=>`<tr><td><b>${m[0]}</b></td><td>${m[1]}</td><td><span class="pill st-${m[2]}">${L[m[2]]}</span><br><span class="muted" style="font-size:13.5px">${m[3]}</span></td></tr>`).join('')}</tbody></table></div>
+  <h2>دورة تشغيل محرك السيناريوهات</h2>
+  <div class="tw"><table style="min-width:680px"><thead><tr><th>الخطوة</th><th>ما يحدث</th><th>الحالة في هذا النموذج</th></tr></thead><tbody>${cyc.map((m,i)=>`<tr><td><b>${i+1}. ${m[0]}</b></td><td>${m[1]}</td><td><span class="pill st-${m[2]}">${L[m[2]]}</span><br><span class="muted" style="font-size:13.5px">${m[3]}</span></td></tr>`).join('')}</tbody></table></div>
+  <p class="muted" style="margin-top:12px">تنتقل المنظومة هنا من «الرؤية الاستباقية» (Predictive Analytics) إلى «الفعل والتوجيه» (Prescriptive &amp; Orchestration Layer): السؤال ليس «هناك عجز قادم» فقط، بل ما الإجراء الأمثل لتجنبه. انظر صفحة <a href="#decisions">القرارات والإجراءات</a>.</p>`;
+}
+const ING_COLS={
+  stock:[['wh','المخزن'],['comm','السلعة'],['qty','الكمية'],['sector','القطاع'],['loss','تلف %'],['date','التاريخ']],
+  sup:[['name','المورد'],['comm','السلعة'],['perDay','الإمداد اليومي'],['origin','المصدر'],['lead','زمن التفعيل'],['date','التاريخ']],
+  inst:[['name','المؤسسة'],['type','النوع'],['sector','القطاع'],['comm','السلعة'],['perDay','الاستهلاك اليومي'],['stock','المخزون'],['date','التاريخ']]
+};
+const ING_T={stock:'المخازن (مخزون)',sup:'الموردون (إمداد)',inst:'المؤسسات (احتياج)'};
+const ORG={local:'محلي',import:'مستورد',alt:'بديل معتمد'};
+const SAMPLES={
+  stock:()=>`الصنف,المستودع,رصيد متاح,آخر تحديث\nدقيق,مخزن العينة 1,500,${daysAgo(0)}\nسولار,خزان العينة 2,900,${daysAgo(1)}\nAnimals Feed,Silo Sample 3,1200,${daysAgo(2)}`,
+  sup:()=>`Supplier,Item,Daily Capacity,Source Type,Lead Time\nمورد العينة أ,قمح,60,مستورد,0\nمورد العينة ب,wheat,40,بديل,10`,
+  inst:()=>`المؤسسة,النوع,الصنف,الاستهلاك اليومي,المخزون الفعلي\nمستشفى العينة,hospital,fuel,5,30\nمخبز العينة,bakery,دقيق,2,10`
+};
+function fmtIng(f,v){
+  if(f==='comm')return esc(commById(v).name);
+  if(f==='sector')return esc(SECT[v]||v);
+  if(f==='origin')return esc(ORG[v]||v);
+  if(f==='type')return esc(ITYPE[v]||v);
+  return esc(v);
+}
+function vIngest(){
+  const g=ui.ing,res=g.res,lb=S.lastBatch;
+  let prev='';
+  if(res){
+    if(res.err)prev=`<section class="panel" style="margin-top:14px"><p class="err" style="margin:0">${esc(res.err)}</p></section>`;
+    else{
+      const cols=ING_COLS[g.target];
+      prev=`<section class="panel" style="margin-top:14px"><h2 style="margin-top:0">نتيجة المعاينة</h2>
+      <div class="chips"><span class="chip">مقبولة: <b>${res.rows.length}</b></span><span class="chip">مرفوضة: <b>${res.bad.length}</b></span>${res.defaults?`<span class="chip">قيم افتراضية طُبّقت: <b>${res.defaults}</b></span>`:''}</div>
+      <h3>مطابقة الأعمدة مع النموذج الموحد</h3>
+      <div class="tw"><table style="min-width:360px"><thead><tr><th>عمود المصدر</th><th>الحقل الموحد</th></tr></thead><tbody>${res.map.map(m=>`<tr><td>${esc(m.h)}</td><td>${esc(CANON_LBL[m.f])}</td></tr>`).join('')}</tbody></table></div>
+      ${res.unmapped.length?`<p class="muted" style="margin-top:8px">أعمدة تجاهلها الاستيراد: ${esc(res.unmapped.join('، '))}</p>`:''}
+      ${res.rows.length?`<h3 style="margin-top:12px">أول ${Math.min(6,res.rows.length)} سجلات بعد التحويل</h3><div class="tw"><table style="min-width:560px"><thead><tr>${cols.map(c=>`<th>${c[1]}</th>`).join('')}</tr></thead><tbody>${res.rows.slice(0,6).map(r=>`<tr>${cols.map(c=>`<td>${fmtIng(c[0],r[c[0]])}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:''}
+      ${res.bad.length?`<h3 style="margin-top:12px">سطور مرفوضة</h3><ul class="err" style="margin:0;padding-inline-start:18px">${res.bad.slice(0,6).map(b=>`<li>${esc(b)}</li>`).join('')}${res.bad.length>6?`<li>و${res.bad.length-6} أخرى</li>`:''}</ul>`:''}
+      ${res.rows.length?`<div style="margin-top:12px"><button type="button" class="btn" data-act="ingdo">اعتماد استيراد ${res.rows.length} سجلات</button></div>`:''}</section>`;
+    }
+  }
+  return `<h1 class="title">التكامل واستيراد البيانات</h1>
+  <p class="lead">طبقتا التكامل والبيانات الموحدة: يستقبل الاستيراد ملفات من الأنظمة المصدرية، ويحوّل أسماء أعمدتها وقيمها إلى النموذج الموحد، ثم يسجلها بمصدرها ووسمها.</p>
+  <div class="notice"><p>يعمل هنا الاستيراد الدفعي من ملفات CSV فقط. الربط الحي بأنظمة ERP وWMS عبر APIs أو CDC أو Kafka يحتاج خادمًا ولم يُبنَ. استخدم النقطة للكسور العشرية.</p></div>
+  <section class="panel"><div class="fields">
+    <div class="field"><label for="ing-target">السجل المستهدف</label><select id="ing-target">${opts(ING_T,g.target)}</select></div>
+    <div class="field"><label for="ing-src">اسم النظام المصدر</label><input id="ing-src" type="text" value="${esc(g.src)}" placeholder="مثال: نظام المخازن"></div>
+    <div class="field"><label for="ing-tag">وسم البيانات المستوردة</label><select id="ing-tag">${opts(TAGS,g.tag)}</select></div>
+    <div class="field"><label for="ing-file">ملف CSV</label><input id="ing-file" type="file" accept=".csv,.txt,text/csv,text/plain"></div></div>
+    <p class="muted" style="font-size:13.5px;margin:10px 0 6px">اختر «موثق» فقط إذا كانت البيانات مستخرجة من نظام رسمي معتمد. الأصل أن يبقى الوسم «مدخل مستخدم» حتى يُوثّق.</p>
+    <label class="lab" for="ing-text">أو ألصق المحتوى هنا (السطر الأول عناوين الأعمدة)</label>
+    <textarea id="ing-text" style="direction:rtl;text-align:right;font-family:var(--font-body)">${esc(g.text)}</textarea>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"><button type="button" class="btn" data-act="ingprev">معاينة</button><button type="button" class="btn ghost" data-act="ingsample">تحميل مثال</button></div></section>
+  ${prev}
+  ${lb?`<section class="panel" style="margin-top:14px"><p style="margin:0 0 8px">آخر دفعة: ${lb.n} سجلات من «${esc(lb.src)}» إلى ${esc(ING_T[lb.target])}.</p><button type="button" class="btn danger sm" data-act="ingundo">تراجع عن آخر دفعة</button></section>`:''}
+  <h2>القاموس الموحد للبيانات</h2>
+  <p class="muted">الأسماء المقبولة لكل حقل في الأنظمة المصدرية. يُهمل اختلاف الحروف والمسافات والهمزات.</p>
+  <div class="tw"><table style="min-width:620px"><thead><tr><th style="width:26%">الحقل الموحد</th><th>الأسماء المقبولة</th></tr></thead><tbody>${Object.keys(CANON).map(f=>`<tr><td><b>${esc(CANON_LBL[f])}</b></td><td>${esc(CANON[f].join('، '))}</td></tr>`).join('')}</tbody></table></div>`;
+}
+function vDecisions(){
+  const R=computeAll(),w=S.settings,P=S.policy,DS=decStats();
+  const bands=[`نقص خلال ${w.warnDays} يومًا`,`نقص بين ${w.warnDays} و${2*w.warnDays} يومًا`,`نقص بعد ${2*w.warnDays} يومًا`];
+  const SO={crit:'حرجة',high:'عالية',med:'متوسطة',low:'منخفضة'};
+  const classes=Object.keys(P.matrix);
+  const matrix=classes.map((cls,ci)=>`<tr><td><b>${esc(cls)}</b></td>${[0,1,2].map(i=>`<td><select id="pol-${ci}-${i}" data-k="pol" data-id="${esc(cls)}" data-f="${i}" aria-label="${esc(cls)}: ${bands[i]}">${opts(SO,P.matrix[cls][i])}</select></td>`).join('')}</tr>`).join('');
+  const cards=R.map(r=>{
+    const c=r.c,u=c.unit,sev=sevOf(r);
+    if(sev==='none')return `<article class="ccard" style="grid-column:1/-1"><header><h3>${esc(c.name)}</h3><span class="pill good">لا عجز متوقع</span></header><p class="muted act">لا إجراء مطلوب تحت السيناريو الحالي.</p></article>`;
+    const p=prescribe(r),sens=sensitivity(c),route=routeOf(r);
+    const n1=`مخزون خارج النطاق المختار: ${nf(p.outScope)} ${esc(u)} · فوائض مؤسسات: ${nf(p.instSur)} ${esc(u)}`;
+    const n2=p.av2===0?'لا موردون بدلاء مسجلون لهذه السلعة.':(p.used.length?p.used.map(x=>`${esc(x.name)}: خلال ${x.lead} يومًا${x.late>0?` (يتأخر ${x.late} يومًا عن بدء النقص)`:''}`).join('<br>'):'غير مطلوب بعد البديل الأول.');
+    const n3=p.q3>0?`خفض الاستهلاك بنسبة ${nf(p.cut)}% من اليوم ${r.scn.first} حتى نهاية الخطة${p.cut>=100?' (لا يكفي)':(p.cut>30?' (نسبة كبيرة وغير عملية غالبًا)':'')}`:'غير مطلوب.';
+    const btn=(q,alt)=>q>0?`<button type="button" class="btn sm" data-act="mkdec" data-id="${c.id}" data-alt="${alt}">إنشاء قرار</button>`:'—';
+    return `<article class="ccard" style="grid-column:1/-1"><header><h3>${esc(c.name)}</h3><div class="pills"><span class="pill ${SEVCLS[sev]}">خطورة ${SEV[sev]}</span>${route==='human'?'<span class="pill warn">يتطلب اعتمادًا بشريًا</span>':'<span class="pill good">مؤهل للاعتماد دون لجنة</span>'}${evPill(r.ev)}</div></header>
+      <p class="act"><b>نقطة التلاشي:</b> بعد ${nf(r.scn.zero)} يومًا (${fdate(r.scn.zero)}) · العجز المتوقع ${nf(r.scn.unmet)} ${esc(u)}.</p>
+      <h3>البدائل مرتبة حسب السرعة والتوفر</h3>
+      <div class="tw"><table class="alts" style="min-width:640px"><thead><tr><th>البديل</th><th>المتاح</th><th>يغطي</th><th>التفاصيل</th><th></th></tr></thead><tbody>
+        <tr><td>1. ${ALT.redistribute}</td><td>${nf(p.av1)} ${esc(u)}</td><td>${nf(p.q1)} ${esc(u)}</td><td class="alt-note">${n1}</td><td>${btn(p.q1,'redistribute')}</td></tr>
+        <tr><td>2. ${ALT.accelerate}</td><td>${nf(p.av2)} ${esc(u)}</td><td>${nf(p.q2)} ${esc(u)}</td><td class="alt-note">${n2}</td><td>${btn(p.q2,'accelerate')}</td></tr>
+        <tr><td>3. ${ALT.reschedule}</td><td>—</td><td>${nf(p.q3)} ${esc(u)}</td><td class="alt-note">${esc(n3)}</td><td>${btn(p.q3,'reschedule')}</td></tr></tbody></table></div>
+      <p class="muted" style="font-size:12.5px;margin:0">الترتيب بالسرعة والتوفر. ترتيبها بالتكلفة يحتاج أسعار وحدات غير مدخلة في هذا النموذج.</p>
+      <h3>حساسية نقطة التلاشي لتأخر الإمداد المستورد طوال الخطة</h3>
+      <div class="tw"><table class="sens" style="min-width:460px"><thead><tr>${sens.map(s=>`<th>تأخر ${s.p}%</th>`).join('')}</tr></thead><tbody><tr>${sens.map(s=>`<td>${s.zero===null?'لا نقص':nf(s.zero)+' يومًا'}</td>`).join('')}</tr></tbody></table></div>
+      <h3>التنبيه الموجّه</h3>
+      <p class="report">${esc(alertText(r,p,sev,route))}</p>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button type="button" class="btn ghost sm" data-act="copyalert" data-id="${c.id}">نسخ التنبيه</button>${ui.flash==='al-'+c.id?'<span class="okmsg">تم النسخ</span>':''}</div></article>`;
+  }).join('');
+  const rows=S.dec.map(d=>{
+    const c=commById(d.comm),i='dec-'+d.id;
+    return `<tr><td style="white-space:nowrap">${esc((d.t||'').slice(0,10))}</td><td>${esc(c.name)}</td><td>${esc(ALT[d.alt]||d.alt)}${d.supplier?`<br><span class="muted">${esc(d.supplier)}</span>`:''}</td><td style="white-space:nowrap">${nf(d.qty)} ${esc(c.unit)}</td><td><span class="pill ${SEVCLS[d.sev]||'none'}">${SEV[d.sev]||''}</span></td><td>${d.route==='human'?'اعتماد بشري':'دون لجنة'}</td>
+    <td><select id="${i}-status" data-k="dec" data-id="${d.id}" data-f="status" aria-label="الحالة">${['مسودة','معتمد','مرفوض'].map(x=>`<option${x===d.status?' selected':''}>${x}</option>`).join('')}</select></td>
+    <td><select id="${i}-outcome" data-k="dec" data-id="${d.id}" data-f="outcome" aria-label="النتيجة"${d.status!=='معتمد'?' disabled':''}>${opts({'':'قيد المتابعة',success:'نجح في منع العجز',partial:'نجح جزئيًا',fail:'لم ينجح'},d.outcome||'')}</select></td>
+    <td style="white-space:nowrap"><button type="button" class="btn ghost sm" data-act="copypo" data-id="${d.id}">نسخ النص</button>${ui.flash==='po-'+d.id?' <span class="okmsg">تم</span>':''} ${delBtn('dec',d.id)}</td></tr>`;
+  }).join('');
+  return `<h1 class="title">القرارات والإجراءات</h1>
+  <p class="lead">عند اكتشاف عجز محتمل لا يكتفي النظام بالتحذير، بل يجيب عن السؤال: ما الإجراء الأمثل لتجنب هذا العجز؟ يقترح البدائل ويحدد من يعتمد القرار، ثم يسجل النتيجة لتحسين التوصيات لاحقًا.</p>
+  ${exNotice()}
+  ${ui.fb?`<div class="panel" style="margin-bottom:14px"><label class="lab" for="fb-text">انسخ النص يدويًا:</label><textarea id="fb-text" readonly>${esc(ui.fb)}</textarea></div>`:''}
+  <section class="panel"><h2 style="margin-top:0">سياسة القرار</h2>
+    <h3>مصفوفة درجة الخطورة</h3>
+    <p class="muted" style="font-size:13.5px">تصنيف التنبؤات حسب الأهمية الاستراتيجية للسلعة وموعد النقص.</p>
+    <div class="tw"><table style="min-width:520px"><thead><tr><th>تصنيف السلعة</th>${bands.map(b=>`<th>${b}</th>`).join('')}</tr></thead><tbody>${matrix}</tbody></table></div>
+    <h3 style="margin-top:14px">صلاحيات التدخل (Approval Flow)</h3>
+    <div class="fields"><div class="field"><label for="pol-auto">أقصى عجز دون لجنة (% من الاحتياج)</label><input id="pol-auto" type="number" min="0" max="100" step="any" value="${P.autoMaxPct}" data-k="pol" data-f="autoMaxPct"></div></div>
+    <p class="muted" style="font-size:13.5px;margin:8px 0 0">يتطلب القرار اعتمادًا بشريًا إذا كانت الخطورة حرجة أو عالية، أو كان العجز أكبر من هذه النسبة. القاعدة بحجم العجز لأن أسعار الوحدات غير مدخلة.</p></section>
+  <h2>الإجراءات المقترحة حسب السلعة</h2>
+  <div class="ccards">${cards}</div>
+  <h2>سجل القرارات والتغذية الراجعة</h2>
+  <p class="muted">${DS.n?`${DS.n} قرارات لها نتيجة مسجلة: نجح ${DS.s}، جزئيًا ${DS.p}، لم ينجح ${DS.f}. معدل النجاح ${DS.rate}%.`:'سجّل نتيجة كل قرار معتمد. هذا السجل أساس معايرة التوصيات لاحقًا، ولا يعدّل النموذج تلقائيًا في هذه النسخة.'}</p>
+  <div class="tw"><table style="min-width:980px"><thead><tr><th>التاريخ</th><th>السلعة</th><th>الإجراء</th><th>الكمية</th><th>الخطورة</th><th>المسار</th><th>الحالة</th><th>النتيجة</th><th></th></tr></thead><tbody>${rows||'<tr><td colspan="9" class="muted">لا قرارات بعد. أنشئ قرارًا من أحد البدائل أعلاه.</td></tr>'}</tbody></table></div>`;
+}
+const VIEWFN={plan:vPlan,architecture:vArch,ingest:vIngest,decisions:vDecisions,dashboard:vDashboard,engine:vEngine,stock:vStock,suppliers:vSuppliers,institutions:vInst,catalog:vCatalog,memo:vMemo,units:vUnits,governance:vGov,roadmap:vRoadmap,audit:vAudit,backup:vBackup};
+const root=document.getElementById('root');
+function render(keepScroll){
+  const cur=route(),y=window.scrollY;
+  const nav=NAV.map(g=>`<div class="grp">${g[0]}</div>`+g[1].map(x=>`<a href="#${x[0]}"${x[0]===cur?' aria-current="page"':''}>${x[1]}</a>`).join('')).join('');
+  root.innerHTML=`<div class="app"><aside class="side"><div class="side-in gut"><div class="brand"><p class="mark">القواهر</p><p class="sub">منظومة تدبير المستلزمات المعيشية لمصر — أفق 9 أشهر</p></div><nav class="nav" aria-label="التنقل">${nav}</nav></div></aside><main class="main"><div class="page gut">${VIEWFN[cur]()}</div></main></div>`;
+  if(keepScroll)window.scrollTo(0,y);else window.scrollTo(0,0);
+  if(ui.fb){const t=document.getElementById('fb-text');if(t){t.focus();t.select()}}
+}
+function commit(msg,keep){if(msg)log(msg);save();render(keep!==false)}
+function flash(k){ui.flash=k;render(true);setTimeout(()=>{if(ui.flash===k){ui.flash=null;render(true)}},2500)}
+async function copyText(t,k){
+  try{await navigator.clipboard.writeText(t);ui.fb=null;flash(k)}
+  catch(e){ui.fb=t;render(true)}
+}
+function applyPreset(k){
+  if(k==='custom'){S.scenario.kind='custom';S.scenario.label=S.scenario.label&&S.scenario.kind!=='port'?S.scenario.label:'سيناريو مخصص'}
+  else{const p=PRE[k];S.scenario={kind:k,label:k==='port'?(S.scenario.label||'الميناء X'):p.name,duration:p.duration,importLoss:p.importLoss,surge:p.surge,start:p.start,targets:Array.isArray(p.targets)?p.targets.slice():p.targets}}
+  commit('تغيير السيناريو إلى: '+scTitle());
+}
+function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
+root.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.id==='preset'){applyPreset(t.value);return}
+  if(t.id==='import-text'){ui.importText=t.value;return}
+  if(t.id==='ing-target'){ui.ing.target=t.value;ui.ing.res=null;render(true);return}
+  if(t.id==='ing-src'){ui.ing.src=t.value;return}
+  if(t.id==='ing-tag'){ui.ing.tag=t.value;ui.ing.res=null;return}
+  if(t.id==='ing-text'){ui.ing.text=t.value;ui.ing.res=null;return}
+  if(t.id==='ing-file'){const f=t.files&&t.files[0];if(f){const fr=new FileReader();fr.onload=()=>{ui.ing.text=String(fr.result||'');ui.ing.res=null;render(true)};fr.readAsText(f,'utf-8')}return}
+  const k=t.dataset&&t.dataset.k;if(!k)return;
+  const f=t.dataset.f,id=t.dataset.id;
+  const isNum=t.type==='number';
+  let v=isNum?num(t.value):t.value;
+  if(k==='set'){
+    const lim={pop:[1000,1e9],days:[1,365],critDays:[1,365],warnDays:[1,365],staleDays:[1,365]};
+    if(lim[f])v=clamp(v,lim[f][0],lim[f][1]);
+    S.settings[f]=v;commit('تعديل إعداد الخطة: '+f+' = '+v);return;
+  }
+  if(k==='sc'){
+    const lim={duration:[0,365],start:[0,365],importLoss:[0,100],surge:[0,300]};
+    if(lim[f])v=clamp(v,lim[f][0],lim[f][1]);
+    if(f!=='label'&&S.scenario.kind!=='port'&&S.scenario.kind!=='custom'){S.scenario.label=PRE[S.scenario.kind].name+' (معدّل)';S.scenario.kind='custom'}
+    S.scenario[f]=v;commit('تعديل السيناريو: '+scTitle());return;
+  }
+  if(k==='pol'){if(f==='autoMaxPct'){S.policy.autoMaxPct=clamp(v,0,100)}else if(S.policy.matrix[id]){S.policy.matrix[id][+f]=v}commit('تعديل سياسة القرار');return}
+  if(k==='coef'){const c=S.comms.find(x=>x.id===id);if(c){c.coef[f]=Math.max(0,v);commit('تعديل معامل '+c.name+' ('+f+')')}return}
+  if(k==='comm'){const c=S.comms.find(x=>x.id===id);if(c){c[f]=v;commit('تعديل بطاقة سلعة: '+c.name)}return}
+  const arr=S[k];if(!arr)return;
+  const r=arr.find(x=>x.id===id);if(!r)return;
+  if(isNum)v=Math.max(0,v);
+  r[f]=v;r.ex=false;
+  commit('تعديل سجل ('+k+'): '+(r.wh||r.name||'')+' · '+f);
+});
+root.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;
+  const a=b.dataset.act,id=b.dataset.id;
+  if(a==='level'){S.settings.level=id;commit('تغيير مستوى الطاقة إلى '+LV[id]);return}
+  if(a==='target'){
+    const sc=S.scenario;
+    if(id==='all')sc.targets='all';
+    else{let cur=sc.targets==='all'?S.comms.map(c=>c.id):sc.targets.slice();cur=cur.includes(id)?cur.filter(x=>x!==id):cur.concat(id);sc.targets=(!cur.length||cur.length===S.comms.length)?'all':cur}
+    if(sc.kind!=='port'&&sc.kind!=='custom'&&sc.kind!=='none'){sc.label=PRE[sc.kind].name+' (معدّل)';sc.kind='custom'}
+    commit('تعديل السلع المتأثرة بالسيناريو');return;
+  }
+  if(a==='del'){const k=b.dataset.k,arr=S[k],i=arr.findIndex(x=>x.id===id);if(i>=0){const r=arr[i];arr.splice(i,1);commit('حذف سجل ('+k+'): '+(r.wh||r.name||''))}return}
+  if(a==='clearex'){['stock','sup','inst'].forEach(k=>{S[k]=S[k].filter(r=>!r.ex)});commit('مسح الأمثلة التوضيحية وبدء الإدخال الفعلي');return}
+  if(a==='copyreport'){copyText(reportText(computeAll()),'report');return}
+  if(a==='copyjson'){copyText(JSON.stringify(S,null,2),'json');return}
+  if(a==='ingsample'){ui.ing.text=SAMPLES[ui.ing.target]();ui.ing.res=null;render(true);return}
+  if(a==='ingprev'){
+    const el=document.getElementById('ing-text'),sr=document.getElementById('ing-src');
+    if(el)ui.ing.text=el.value;if(sr)ui.ing.src=sr.value;
+    ui.ing.res=buildImport(ui.ing.target,ui.ing.text,ui.ing.src,ui.ing.tag);render(true);return;
+  }
+  if(a==='ingdo'){
+    const res=ui.ing.res,tg=ui.ing.target;if(!res||res.err||!res.rows.length)return;
+    const src=ui.ing.src||'نظام خارجي';
+    S[tg].push(...res.rows);S.lastBatch={id:res.rows[0].batch,target:tg,n:res.rows.length,src};
+    ui.ing.res=null;ui.ing.text='';
+    commit('استيراد '+res.rows.length+' سجلات من «'+src+'» إلى '+ING_T[tg]);return;
+  }
+  if(a==='ingundo'){const lb=S.lastBatch;if(lb){S[lb.target]=S[lb.target].filter(r=>r.batch!==lb.id);S.lastBatch=null;commit('تراجع عن دفعة استيراد من «'+lb.src+'»')}return}
+  if(a==='mkdec'){
+    const r=computeAll().find(x=>x.c.id===id);if(!r)return;
+    const p=prescribe(r);if(!p)return;
+    const alt=b.dataset.alt,sev=sevOf(r),route=routeOf(r),u=r.c.unit;
+    const mk=o=>S.dec.unshift(Object.assign({id:uid(),t:new Date().toISOString(),comm:id,sev,route,status:'مسودة',outcome:'',first:r.scn.first,zero:r.scn.zero,unmet:r.scn.unmet,scn:scTitle()},o));
+    if(alt==='redistribute')mk({alt,qty:p.q1,detail:`نقل ${nf(p.q1)} ${u} من مخزون خارج النطاق المختار أو فوائض المؤسسات`});
+    if(alt==='accelerate')p.used.forEach(s=>mk({alt,qty:s.qty,supplier:s.name,detail:`توريد ${nf(s.qty)} ${u} من «${s.name}» بدءًا من اليوم ${s.lead} وبمعدل ${nf(s.perDay)} ${u}/يوم`}));
+    if(alt==='reschedule')mk({alt,qty:p.q3,detail:`خفض استهلاك ${r.c.name} بنسبة ${nf(p.cut)}% من اليوم ${r.scn.first} حتى نهاية الخطة`});
+    commit('إنشاء قرار ('+ALT[alt]+') لسلعة '+r.c.name);return;
+  }
+  if(a==='copyalert'){const r=computeAll().find(x=>x.c.id===id);if(!r)return;const p=prescribe(r);if(!p)return;copyText(alertText(r,p,sevOf(r),routeOf(r)),'al-'+id);return}
+  if(a==='copypo'){const d=S.dec.find(x=>x.id===id);if(d)copyText(poText(d),'po-'+id);return}
+  if(a==='import'){
+    const el=document.getElementById('import-text');ui.importText=el?el.value:'';
+    try{
+      const o=JSON.parse(ui.importText);
+      if(!(o&&o.v===1&&Array.isArray(o.stock)&&Array.isArray(o.sup)&&Array.isArray(o.inst)&&Array.isArray(o.comms)&&o.settings&&o.scenario))throw new Error('x');
+      adopt(o);
+      ui.importErr=null;ui.importText='';commit('استيراد نسخة احتياطية');
+    }catch(err){ui.importErr='النص ليس نسخة صالحة من القواهر.';render(true)}
+    return;
+  }
+  if(a==='reset'){
+    if(ui.confirm==='reset'){ui.confirm=null;S=seed();log('إعادة ضبط البيانات إلى الأمثلة');save();render(false)}
+    else{ui.confirm='reset';render(true);setTimeout(()=>{if(ui.confirm==='reset'){ui.confirm=null;render(true)}},4000)}
+  }
+});
+root.addEventListener('submit',e=>{
+  const f=e.target.closest('form[data-add]');if(!f)return;
+  e.preventDefault();
+  const k=f.dataset.add,fd=Object.fromEntries(new FormData(f).entries());
+  const r={id:uid(),ex:false,date:fd.date||daysAgo(0),tag:fd.tag||'usr'};
+  if(k==='stock'){Object.assign(r,{wh:fd.wh,comm:fd.comm,qty:num(fd.qty),sector:fd.sector,loss:num(fd.loss)})}
+  if(k==='sup'){Object.assign(r,{name:fd.name,comm:fd.comm,perDay:num(fd.perDay),origin:fd.origin,lead:num(fd.lead)})}
+  if(k==='inst'){Object.assign(r,{name:fd.name,type:fd.type,sector:fd.sector,comm:fd.comm,perDay:num(fd.perDay),stock:num(fd.stock)})}
+  S[k].push(r);
+  commit('إضافة سجل ('+k+'): '+(r.wh||r.name));
+});
+window.addEventListener('hashchange',()=>{ui.fb=null;render(false)});
+load();
+render(false);
+</script>
+
+</body></html>
